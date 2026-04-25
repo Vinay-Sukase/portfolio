@@ -1,0 +1,744 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title> Unit 1 - AML</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="26f682cb-1765-8034-b764-fc98dde71dde" class="page sans"><header><h1 class="page-title" dir="auto"> Unit 1 - AML</h1><p class="page-description" dir="auto"></p><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>Tags</th><td><span class="selected-value select-value-color-blue">AML</span></td></tr></tbody></table></header><div class="page-body"><div style="display:contents" dir="auto"><h1 id="26f682cb-1765-804f-a594-ee6728e65b6a" class="">1. Introduction  </h1></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26f682cb-1765-8055-833f-dcca2a5b20d9"><div style="font-size:1.5em"><span class="icon">🐾</span></div><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26f682cb-1765-80f4-8bf3-c0f26acd261b" class="">What is Machine Learning ? </h2></div><div style="display:contents" dir="auto"><p id="26f682cb-1765-8047-95b4-c937e8bbb39e" class="">→  Machine Learning is the science (art of) programming computers so they can learn from data.</p></div></div></figure></div><div style="display:contents" dir="auto"><ul id="26f682cb-1765-80f1-9594-ed6dde576f17" class="bulleted-list"><li style="list-style-type:disc">General definition : <div style="display:contents" dir="auto"><blockquote id="26f682cb-1765-805c-ab14-ea34e1677033" class="">Machine learning is the field of study that give computers the ability to learn without being explicitly programmed. </blockquote></div></li></ul></div><div style="display:contents" dir="auto"><ul id="26f682cb-1765-80a1-8123-ce2bf499f63b" class="bulleted-list"><li style="list-style-type:disc">Engineering-oriented definition :<div style="display:contents" dir="auto"><blockquote id="26f682cb-1765-80b1-a434-f95929045ff4" class=""> A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E. </blockquote></div><div style="display:contents" dir="auto"><p id="271682cb-1765-8000-a641-d048f264a281" class="">Example:</p></div><div style="display:contents" dir="auto"><p id="271682cb-1765-805c-b1d0-e6edd366f469" class="">The spam filter is a machine learning program that can learn to flag spam given examples of spam emails. (e.g. flagged by users) and examples of regular (non-spam, also called as “ham”) emails. The examples that the system uses to learn are called <em><mark class="highlight-yellow_background">training set</mark></em>. Each training example is called a <em><mark class="highlight-yellow_background">training instance</mark></em>. </p></div><div style="display:contents" dir="auto"><p id="271682cb-1765-8083-afe8-e0856524289c" class="">In this case, the task T is to flag spam for new emails, the experience E is the training data, and the performance measure P needs to be defined; for example, you can use the ratio of correctly classified emails. This particular performance measure is called <em><mark class="highlight-yellow_background">accuracy</mark></em><em> </em>and it is often used in the classification task.</p></div></li></ul></div><div style="display:contents" dir="auto"><hr id="26f682cb-1765-808c-844b-d0471e69084d"/></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="271682cb-1765-8056-bf51-fdc078bd69b8"><div style="font-size:1.5em"><span class="icon">🐾</span></div><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26f682cb-1765-800a-8840-ce00528796e1" class="">Why to use machine learning ?  </h2></div><div style="display:contents" dir="auto"><p id="271682cb-1765-802e-b442-de390890524e" class="">→  </p></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-8025-b195-f58767931035" class="bulleted-list"><li style="list-style-type:disc">Automation of Decision Making: ML automates the tasks that would be hard to program manually, like recognizing faces or translating languages.</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-8052-8b0c-c5c7a7877822" class="bulleted-list"><li style="list-style-type:disc">Handling Complex Data: ML can handle huge amounts of data and extract meaningful patterns.</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-8005-8fab-d9c33447b22f" class="bulleted-list"><li style="list-style-type:disc">Adaptability: ML models improves with more data and can adapt to new patterns.</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-8054-ac3f-ccc0960d42aa" class="bulleted-list"><li style="list-style-type:disc">Performance: In many tasks (like image recognition), ML models performs better than traditional algorithms.</li></ul></div></div></figure></div><div style="display:contents" dir="auto"><p id="271682cb-1765-803b-9e42-d20d84f077e4" class="">Applying ML techniques to dig into large amounts of data can help discover patterns that were not immediately apparent. This is called data mining.</p></div><div style="display:contents" dir="auto"><hr id="26f682cb-1765-80e4-a16d-d2bcb822cade"/></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="271682cb-1765-8057-a758-c3366baa5e99"><div style="font-size:1.5em"><span class="icon">🐾</span></div><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26f682cb-1765-80be-bb91-e833a91d7f01" class="">When to use machine learning ? </h2></div><div style="display:contents" dir="auto"><p id="271682cb-1765-80b4-a81e-e49859fc5379" class="">→ </p></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-80c2-acb0-da0e650c5877" class="bulleted-list"><li style="list-style-type:disc">There is a large amount of data.</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-80b9-bc41-cc1664721547" class="bulleted-list"><li style="list-style-type:disc">The problem is too complex to manually define rules.</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-8078-845a-d38660a72746" class="bulleted-list"><li style="list-style-type:disc">You want the system to improve overtime.</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-8019-bc91-e9ac0163ef1a" class="bulleted-list"><li style="list-style-type:disc">examples:<div style="display:contents" dir="auto"><ul id="271682cb-1765-80d7-a3ac-d138951d6950" class="bulleted-list"><li style="list-style-type:circle">Spam email detection.</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-80a6-839e-d6092c45c253" class="bulleted-list"><li style="list-style-type:circle">Recommendation Systems (e.g.Netflix)</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-8071-99bb-d0c4bcb8b004" class="bulleted-list"><li style="list-style-type:circle">Autonomous driving (real-time object recognition and decision making).</li></ul></div></li></ul></div></div></figure></div><div style="display:contents" dir="auto"><hr id="271682cb-1765-800e-8afb-e18517a6b76d"/></div><div style="display:contents" dir="auto"><h1 id="271682cb-1765-80a8-b2cf-cbeb52fef6dc" class="">2. Learning Paradigms </h1></div><div style="display:contents" dir="auto"><p id="271682cb-1765-8067-a924-d2673ff3d4e7" class="">There are so many different types of ML systems that it is useful to classify them in broad categories based on:</p></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-800b-88fb-fbb0c0a75568" class="bulleted-list"><li style="list-style-type:disc">Whether or not they are trained with human supervision (supervised, unsupervised, semisupervised, and reinforcement learning,)</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-80ff-b4d4-d6b301862856" class="bulleted-list"><li style="list-style-type:disc">Whether or not they can learn incrementally on the fly (online vs batch learning).</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-80e8-8166-f0bb90fba07e" class="bulleted-list"><li style="list-style-type:disc">Whether they work by simply comparing new data points to know data points, or instead detect patterns in the training data and build a predictive model, much like scientists do (instance-based vs model-based learning).</li></ul></div><div style="display:contents" dir="auto"><p id="271682cb-1765-80a9-bbff-fdde188c7901" class="">These criteria are not exclusive; we can combine them in any way we like. For example, a state-of-the-art spam filter may learn on the fly using a deep neural network model trained using examples of spam and ham; this makes it an online, model-based, supervised learning system.</p></div><div style="display:contents" dir="auto"><hr id="271682cb-1765-805a-88a5-e3dbce3a0559"/></div><div style="display:contents" dir="auto"><h2 id="271682cb-1765-8039-af5b-f1c3717f873e" class="">Supervised / Unsupervised Learning</h2></div><div style="display:contents" dir="auto"><p id="271682cb-1765-805f-beb8-e1b5ed67eb3b" class="">Machine learning systems can be classified according to the amount and type of supervision they get during training. There are four major categories. Supervised, unsupervised, semi-supervised, and reinforcement learning.</p></div><div style="display:contents" dir="auto"><hr id="271682cb-1765-80bb-9a79-e7633be397c5"/></div><div style="display:contents" dir="auto"><h3 id="271682cb-1765-802d-99b5-d002f9bd4a70" class="">Supervised Learning</h3></div><div style="display:contents" dir="auto"><p id="271682cb-1765-8064-a617-d555629e75bf" class="">In <em><mark class="highlight-yellow_background">Supervised Learning</mark></em><em> </em>the training data you feed to the algorithm includes the desired solutions, called labels. The model is trained on labelled data (input-output pairs). The goal is to learn mapping from input to output. </p></div><div style="display:contents" dir="ltr"><figure id="271682cb-1765-80da-a393-ef7277f9c160" class="image"><a href="supervised_learning.jpeg"><img style="width:670.98095703125px" src="supervised_learning.jpeg"/></a></figure></div><div style="display:contents" dir="auto"><p id="271682cb-1765-80c1-b7ee-d21bbc2c0631" class="">A typical supervised learning task is called <em><mark class="highlight-yellow_background">classification.</mark></em><em> </em>The spam filter is a good example of this; it is trained with many example emails along with their <em><mark class="highlight-yellow_background">class</mark></em> (spam or ham) and it must learn how to classify new emails.</p></div><div style="display:contents" dir="auto"><p id="271682cb-1765-8068-9cda-c1e448463838" class="">Another typical task is to predict a <em><mark class="highlight-yellow_background">target</mark></em> numeric value, such as price of a car. given a set of <em><mark class="highlight-yellow_background">features</mark></em> (milage, age, brand, etc.) called <em><mark class="highlight-yellow_background">predictors</mark></em>. This sort of task is called as <em><mark class="highlight-yellow_background">Regression.</mark></em> To train system. you need to give it many examples of cars, including both predictors and their labels (i.e. their prices.)</p></div><div style="display:contents" dir="auto"><p id="271682cb-1765-8037-af3e-ce9c715c603d" class="">In machine learning an <em><mark class="highlight-yellow_background">attribute</mark></em> is a data type (e.g. “Mileage”). while a <em><mark class="highlight-yellow_background">feature</mark></em> has several meanings depending on the context, but generally means an attribute plus its value (e.g. “Mileage = 15,000”).</p></div><div style="display:contents" dir="ltr"><figure id="271682cb-1765-80cf-800a-e0d3e873c99b" class="image"><a href="1.6_Regression.jpeg"><img style="width:660.9896240234375px" src="1.6_Regression.jpeg"/></a></figure></div><div style="display:contents" dir="auto"><p id="271682cb-1765-802c-a85b-ef4d4355c0c2" class="">Some regression algorithms can be used for classification as well, and vice versa. For example. <em><mark class="highlight-yellow_background">Logistic Regression</mark></em> is commonly used for classification, as it can output a value that corresponds to the probability of belonging to a given class (e.g. 20% chance of being spam).</p></div><div style="display:contents" dir="auto"><p id="271682cb-1765-808d-acfd-ce48cf454ea3" class="">Important supervised learning algorithms:</p></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-8017-a884-ed693dad1e50" class="bulleted-list"><li style="list-style-type:disc">K-Nearest Neighbors</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-804f-9fbb-cbe590ccc4eb" class="bulleted-list"><li style="list-style-type:disc">Linear Regression</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-8014-aff7-f1d8009825c8" class="bulleted-list"><li style="list-style-type:disc">Logistic Regression</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-80cb-bcc9-ec1f09d62c53" class="bulleted-list"><li style="list-style-type:disc">Support Vector Machines (SVMs)</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-8038-9a3f-dfdf5203e73b" class="bulleted-list"><li style="list-style-type:disc">Decision Trees and Random Forests</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-8049-951d-e99f185d9205" class="bulleted-list"><li style="list-style-type:disc">Neural Networks</li></ul></div><div style="display:contents" dir="auto"><hr id="271682cb-1765-8038-adae-c495a7f79167"/></div><div style="display:contents" dir="auto"><h3 id="271682cb-1765-80cf-8096-df25174c3d9e" class="">Unsupervised Learning </h3></div><div style="display:contents" dir="auto"><p id="271682cb-1765-8011-bbb2-e872e8346028" class="">In <em><mark class="highlight-yellow_background">Unsupervised Learning</mark></em><em> </em>the training data is unlabeled. The model tries to find patterns in data. For example: Clustering customers by purchase behavior.</p></div><div style="display:contents" dir="ltr"><figure id="271682cb-1765-80fc-8b3a-e4cde2d49881" class="image"><a href="Unsupervised_Learning.jpeg"><img style="width:668.9844360351562px" src="Unsupervised_Learning.jpeg"/></a></figure></div><div style="display:contents" dir="auto"><p id="271682cb-1765-802a-945a-f4a6ef6cca3c" class="">Important supervised learning algorithms:</p></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-80bb-852f-e617e09bfa1e" class="bulleted-list"><li style="list-style-type:disc">Clustering Algorithms -<div style="display:contents" dir="auto"><ul id="271682cb-1765-8094-915d-f22e981baede" class="bulleted-list"><li style="list-style-type:circle">k-Means clustering</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-80a2-8810-c94589c08f9e" class="bulleted-list"><li style="list-style-type:circle">Hierarchical Cluster Analysis (HCA)</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-8025-b6e9-fb89e22e74de" class="bulleted-list"><li style="list-style-type:circle">Expectation Maximization</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-8064-bffa-df1eb636055d" class="bulleted-list"><li style="list-style-type:disc">Visualization and Dimensionality Reduction -<div style="display:contents" dir="auto"><ul id="271682cb-1765-80c2-a0b2-e07980c45c5c" class="bulleted-list"><li style="list-style-type:circle">Principal Component Analysis (PCA)</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-807d-80ac-f8ab54131421" class="bulleted-list"><li style="list-style-type:circle">Kernel PCA</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-8018-b6fe-dfca78798d3b" class="bulleted-list"><li style="list-style-type:circle">Locally-Linear Embedding (LLE)</li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-80ba-9f62-f507b97a3e35" class="bulleted-list"><li style="list-style-type:circle">t-distributed Stochastic Neighbor Embedding (t-SNE)</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-8046-be78-d9afa9bb2187" class="bulleted-list"><li style="list-style-type:disc">Association Rule Learning - <div style="display:contents" dir="auto"><ul id="271682cb-1765-802c-b9b9-cfc6f796ed81" class="bulleted-list"><li style="list-style-type:circle">Apriori </li></ul></div><div style="display:contents" dir="auto"><ul id="271682cb-1765-80a1-9452-d04d3d916492" class="bulleted-list"><li style="list-style-type:circle">Eclat</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><hr id="271682cb-1765-807b-b59c-fd8b464e6981"/></div><div style="display:contents" dir="auto"><p id="271682cb-1765-80b1-a188-d968a17dd3f8" class="">For example, lets say you have a lot of data about your blog’s visitors. You may want to run a <em><mark class="highlight-yellow_background">Clustering</mark></em> algorithm to try to detect group of similar visitors. At no point we tell the algorithm which group of visitors belongs to: it finds those connections without your help. For example, it might notice that 40% of your visitors are teenagers who love comic books and generally read your blog after school, while 20% are adults who enjoy sci-fi and who visit during the weekends. If you use a <em><mark class="highlight-yellow_background">Hierarchical Clustering Algorithm</mark></em>, it may also subdivide each group into smaller groups. This may help you target your posts for each group.</p></div><div style="display:contents" dir="ltr"><figure id="271682cb-1765-8080-87b0-ed876dba428f" class="image"><a href="1.8_Clustering.jpeg"><img style="width:500.0000305175781px" src="1.8_Clustering.jpeg"/></a></figure></div><div style="display:contents" dir="auto"><hr id="271682cb-1765-8028-be46-e4415878495e"/></div><div style="display:contents" dir="auto"><p id="271682cb-1765-80b2-a390-c084d7538629" class=""><em><mark class="highlight-yellow_background">Visualization Algorithms</mark></em> are also good examples of unsupervised learning algorithms you feed them a lot of complex and unlabeled data, and they output a 2D or 3D representation of your data that can easily be plotted. These algorithms try to preserve as much structure as they can (e.g. trying to keep separate clusters in the input space from overlapping in the visualization), so you can understand how the data is organized and perhaps identify unsuspected patterns.</p></div><div style="display:contents" dir="ltr"><figure id="271682cb-1765-8060-b26a-e1e958d175b8" class="image"><a href="1.9_Visualization_(t-SNE).jpeg"><img style="width:709.984375px" src="1.9_Visualization_(t-SNE).jpeg"/></a><figcaption>We can notice how animals are rather well separated from vehicles, how horses are close to deer but far from birds, and so on.</figcaption></figure></div><div style="display:contents" dir="auto"><p id="271682cb-1765-8099-92e0-c96711e70a99" class="">A related task is <em><mark class="highlight-yellow_background">Dimensionality</mark></em><em><mark class="highlight-yellow_background"> Reduction</mark></em>, in which the goal is to simplify the data without loosing too much information. One way to do this is to merge several correlated features into one. For example, a car’s mileage maybe correlated with its age, so the dimensionality reduction algorithms will merge them into one feature that represents the car’s wear and tear. This is called <em><mark class="highlight-yellow_background">feature extraction</mark></em><em>.</em></p></div><div style="display:contents" dir="auto"><hr id="271682cb-1765-80b6-a5eb-d8b9b983a80d"/></div><div style="display:contents" dir="auto"><p id="271682cb-1765-8047-baf9-c39de9e6e016" class="">Another important unsupervised task is <em><mark class="highlight-yellow_background">Anomaly Detection,</mark></em> for example, detecting unusual credit card transactions to prevent fraud, catching manufacturing defects, or automatically removing outliers from a dataset before feeding it to another learning algorithm. The system is trained with normal instances, and when it sees a new instance it can tell whether it looks like a normal one or whether it is likely an anomaly.</p></div><div style="display:contents" dir="ltr"><figure id="271682cb-1765-80e0-8ed2-e2d8e5096ddf" class="image"><a href="1.10_Anomaly_detection.jpeg"><img style="width:493.9757080078125px" src="1.10_Anomaly_detection.jpeg"/></a></figure></div><div style="display:contents" dir="auto"><p id="271682cb-1765-808a-b9a0-f92d04022040" class="">Finally, another common unsupervised task is <em><mark class="highlight-yellow_background">Association rule learning</mark></em>, in which the goal is to dig into large amounts of data and discover interesting relations between attributes. For example, suppose you own a supermarket. Running an association rule on your sales log may reveal that people who purchase Bread and Butter also tend to buy Eggs. Thus, you may want to place these items close to each other.</p></div><div style="display:contents" dir="auto"><hr id="271682cb-1765-8037-a1ed-f32d836acc82"/></div><div style="display:contents" dir="auto"><h3 id="271682cb-1765-8019-80b2-fcb30601bfec" class="">Semisupervised Learning </h3></div><div style="display:contents" dir="auto"><p id="271682cb-1765-801f-8794-fb79de19def5" class="">Some algorithms are can deal with partially labeled training data, usually a lot of unlabeled data and a little it of labeled data. This is called <em><mark class="highlight-yellow_background">semisupervised learning</mark></em>. </p></div><div style="display:contents" dir="ltr"><figure id="271682cb-1765-80d9-a719-ecc7ba036130" class="image"><a href="1.11_Semisupervised_Learning.jpeg"><img style="width:529.9913330078125px" src="1.11_Semisupervised_Learning.jpeg"/></a></figure></div><div style="display:contents" dir="auto"><p id="271682cb-1765-8047-be7e-c91d92e6d315" class="">Some photo-hosting services, such as Google Photos, are good examples of this. Once you upload all your family photos to the service, it will automatically recognize that the same person A shows up in photos 1,5, and 11, while another person B show up in photos 2,5, and 7. This is unsupervised part of the algorithm (clustering). Now all the system needs is for you to tell it who these these people are. Just one label per person and it is able to name everyone in every photo, which is useful for searching photos.</p></div><div style="display:contents" dir="auto"><p id="271682cb-1765-80b5-856d-f096700736b0" class="">Most semisupervised learning algorithms are combinations of unsupervised and supervised algorithms. For example, <em>deep belief networks </em>(DBNs) are based on unsupervised components called <em>restricted Boltzmann machines </em>(RBMs) stacked on top of one another. RBMs are trained sequentially in an unsupervised manner, and then the whole system is fined-tuned using supervised learning techniques. </p></div><div style="display:contents" dir="auto"><hr id="271682cb-1765-8005-aef7-d3b5bf7ded37"/></div><div style="display:contents" dir="auto"><h3 id="271682cb-1765-80c2-ba54-fae4a2b61fc9" class="">Reinforcement Learning</h3></div><div style="display:contents" dir="auto"><p id="271682cb-1765-80d8-8fc9-fa2387b729d8" class=""><em><mark class="highlight-yellow_background">Reinforcement learning</mark></em> is a very different beast. The learning system, called an agent in this context, can observe the environment, select and perform actions, and get <em>rewards</em> in return ( or <em>penalties </em>in the form of negative rewards). It must then learn by itself what is the best strategy, called a<em> policy</em>, to get the most reward over time. A policy defines what action the agent should choose when it is in a given situation.</p></div><div style="display:contents" dir="ltr"><figure id="271682cb-1765-8082-b6bb-f0009e795839" class="image"><a href="1.13_Reinforcement_Learning.jpeg"><img style="width:670.9896240234375px" src="1.13_Reinforcement_Learning.jpeg"/></a></figure></div><div style="display:contents" dir="auto"><p id="271682cb-1765-8094-98b1-c03a84fa3988" class="">For example, many robots implement <em>Reinforcement learning algorithms </em>to learn how to walk. DeepMind’s AlphaGo program is also a good example of Reinforcement Learning: it made the headlines in March 2016 when it beat world champion Lee Sedol at the game of Go. It learned its winning policy by analyzing millions of games, and then playing games against itself. Note that learning was turned off during the games against the champion; AlphaGo was just applying the policy it had learned.</p></div><div style="display:contents" dir="auto"><hr id="271682cb-1765-80cb-bee4-ffcb96b9a3f7"/></div><div style="display:contents" dir="auto"><h1 id="271682cb-1765-8030-96c1-c0759d1c58e3" class="">3. Main Challenges of Machine Learning </h1></div><div style="display:contents" dir="auto"><hr id="271682cb-1765-800b-9ba9-eecb037e93ca"/></div><div style="display:contents" dir="auto"><p id="271682cb-1765-8044-a42a-d65174337bf1" class="">Main task is to select a learning algorithm and train it on some data, the two things that can go wrong are “bad algorithm” and “bad data”.</p></div><div style="display:contents" dir="auto"><hr id="275682cb-1765-806f-952a-c0f092ec43fa"/></div><div style="display:contents" dir="auto"><h2 id="275682cb-1765-803b-8bb1-c32460fefabe" class="">Insufficient Quantity of Training Data</h2></div><div style="display:contents" dir="auto"><p id="275682cb-1765-803f-a308-ea836a4c209a" class="">For a toddler to learn what an apple is, all it takes is for you to point to an apple and say “apple” (possibly repeating this procedure a few times). Now the child is able to recognize apples in all sorts of colors and shapes.</p></div><div style="display:contents" dir="auto"><p id="275682cb-1765-8067-b40c-d40a04410afb" class="">Machine Learning is not quite there yet; it takes a lot of data for most Machine Learning algorithms to work properly. Even for very simple problems you typically need thousands of examples, and for very simple problems you typically need thousand of examples, and for complex problems such as image or speech recognition you need millions of examples (unless you can reuse parts of an existing model).</p></div><div style="display:contents" dir="auto"><hr id="275682cb-1765-8051-8254-fb0d79e28e08"/></div><div style="display:contents" dir="auto"><h2 id="275682cb-1765-8073-b171-ee3e9d886018" class="">The Unreasonable Effectiveness of Data</h2></div><div style="display:contents" dir="auto"><p id="275682cb-1765-8027-9238-f12d33ae5c7b" class="">In a famous paper published in 2001, Microsoft researchers Michele Banko and Eric Brill showed that very different Machine Learning algorithms, including fairly simple ones, performed, almost identically well on a complex problem of natural language disambiguation once they were given enough data.</p></div><div style="display:contents" dir="ltr"><figure id="275682cb-1765-8061-821a-c5122b4ba26d" class="image"><a href="1.21_importance_of_data_versus_algorithms.jpeg"><img style="width:625px" src="1.21_importance_of_data_versus_algorithms.jpeg"/></a></figure></div><div style="display:contents" dir="auto"><p id="275682cb-1765-8024-b3ab-ea48fe6087d3" class="">As the authors put it: “these results suggest that we may want to reconsider the tradeoff between spending time and money on algorithm development verses spending it on corpus development”.</p></div><div style="display:contents" dir="auto"><p id="275682cb-1765-80d2-a799-f1c4c0c3dc84" class="">The idea that <span style="border-bottom:0.05em solid">data matters more than algorithms for complex problems</span> was further popularized by Peter Norvig et al. in a research paper titled “The Unreasonable Effectiveness of Data” published in 2009. It should be noted, however, that small- and medium- sized datasets are still very common, and it is not always easy or cheap to get extra training data, so don’t abandon algorithms just yet.</p></div><div style="display:contents" dir="auto"><hr id="275682cb-1765-80cd-9e26-c17e065db890"/></div><div style="display:contents" dir="auto"><h2 id="275682cb-1765-8026-aa93-dd816b7a1691" class="">Nonrepresentative Training Data</h2></div><div style="display:contents" dir="auto"><p id="275682cb-1765-8030-86ff-ca540d100531" class="">
+</p></div><div style="display:contents" dir="auto"><p id="275682cb-1765-80f6-bc11-d70064a27786" class="">In order to generalize well, it is crucial that your training data be representative of the new cases you want to generalize to. This is true whether you use instance-based learning or model-based learning.<br/></p></div><div style="display:contents" dir="auto"><p id="275682cb-1765-8089-9200-e4034fad4947" class="">For example, the set of countries you used earlier for training the linear model was not perfectly representative; it did not contain any country with a GDP per capita lower than $23,500 or higher than $62,500. Figure 1-22 shows what the data looks like when you add such countries. </p></div><div style="display:contents" dir="auto"><p id="275682cb-1765-80e4-aa3d-ef36fbb91400" class="">If you train a linear model on this data, you get the solid line, while the old model is represented by the dotted line. As you can see, not only does adding a few missing countries significantly alter the model, but it makes it clear that such a simple linear model is probably never going to work well. It seems that very rich countries are not happier than moderately rich countries (in fact, they seem slightly unhappier!), and conversely some poor countries seem happier than many rich countries. </p></div><div style="display:contents" dir="auto"><p id="275682cb-1765-80a6-9cc9-ce6e04784eb9" class="">By using a nonrepresentative training set, you trained a model that is unlikely to make accurate predictions, especially for very poor and very rich countries.</p></div><div style="display:contents" dir="ltr"><figure id="275682cb-1765-80db-b052-e0d4f1de4c90" class="image"><a href="1.22_A_more_representative_training_sample.jpeg"><img style="width:709.96875px" src="1.22_A_more_representative_training_sample.jpeg"/></a></figure></div><div style="display:contents" dir="auto"><p id="275682cb-1765-80fc-b064-c435cb6e000c" class="">It is crucial to use a training set that is representative of the cases you want to generalize to. This is often harder than it sounds:</p></div><div style="display:contents" dir="auto"><p id="275682cb-1765-80d7-8791-e2c591a179d8" class="">if the sample is too small, you will have sampling noise (i.e., nonrepresentative data as a result of chance), but even very large samples can be nonrepresentative if the sampling method is flawed. This is called <mark class="highlight-yellow_background">sampling bias</mark>.</p></div><div style="display:contents" dir="auto"><p id="275682cb-1765-8066-821d-f49fcb6b7a0e" class="">                                             <strong>           EXAMPLES OF SAMPLING BIAS </strong><br/>Perhaps the most famous example of sampling bias happened during the US presidential election in 1936, which pitted Landon against Roosevelt: the Literary Digest conducted a very large poll, sending mail to about 10 million people. It got 2.4 million answers, and predicted with high confidence that Landon would get 57% of the votes. Instead, Roosevelt won with 62% of the votes. </p></div><div style="display:contents" dir="auto"><ul id="275682cb-1765-8079-8719-fb29902cc49f" class="bulleted-list"><li style="list-style-type:disc">The flaw was in the Literary Digest’s sampling method:<br/>First, to obtain the addresses to send the polls to, the Literary Digest<br/>used telephone directories, lists of magazine subscribers, club<br/>membership lists, and the like. All of these lists tended to favor<br/>wealthier people, who were more likely to vote Republican (hence<br/>Landon). </li></ul></div><div style="display:contents" dir="auto"><ul id="275682cb-1765-8051-9470-ed2527472cff" class="bulleted-list"><li style="list-style-type:disc">Second, less than 25% of the people who were polled answered.<br/>Again this introduced a sampling bias, by potentially ruling out<br/>people who didn’t care much about politics, people who didn’t like<br/>the Literary Digest, and other key groups. This is a special type of<br/>sampling bias called nonresponse bias.</li></ul></div><div style="display:contents" dir="auto"><p id="275682cb-1765-801d-b2c8-d62e870ed611" class=""><br/>Here is another example: say you want to build a system to recognize<br/>funk music videos. One way to build your training set is to search for<br/>“funk music” on YouTube and use the resulting videos. But this assumes<br/>that YouTube’s search engine returns a set of videos that are<br/>representative of all the funk music videos on YouTube. In reality, the<br/>search results are likely to be biased toward popular artists (and if you<br/>live in Brazil you will get a lot of “funk carioca” videos, which sound<br/>nothing like James Brown). On the other hand, how else can you get a<br/>large training set?</p></div><div style="display:contents" dir="auto"><hr id="275682cb-1765-8042-ae24-c040f91207c9"/></div><div style="display:contents" dir="auto"><h2 id="275682cb-1765-80b4-ac98-eb8ca665ab39" class="">Poor Quality Data </h2></div><div style="display:contents" dir="auto"><p id="275682cb-1765-80fb-93c7-ebf66ad63076" class="">If your training data is full of errors, outliers, and noise (.g. due to poor-quality measurements), it will make it harder for the system to detect the underlying patterns, so your system is likely to perform well. It is often well worth the effort to spend time cleaning up your training data. The truth is, most data scientists spend a significant part of their time doing just that. For example:</p></div><div style="display:contents" dir="auto"><ul id="275682cb-1765-8040-9ce6-f30f1d50c2d0" class="bulleted-list"><li style="list-style-type:disc">If some instances are clearly outliers, it may help to simply discard them or try to fix the errors manually.</li></ul></div><div style="display:contents" dir="auto"><ul id="275682cb-1765-8031-ba34-df88faf89db3" class="bulleted-list"><li style="list-style-type:disc">If some instances are missing a few features (e.g. 5% of your customers did not specify their age), you must decide whether you want to ignore the attributes altogether, ignore these instances. fill in the missing values (e.g. with the median age), or train one model with the feature and one model without it, and so on.</li></ul></div><div style="display:contents" dir="auto"><hr id="275682cb-1765-809a-b276-e39fcaa36535"/></div><div style="display:contents" dir="auto"><h2 id="27c682cb-1765-804b-9672-c5844402e12b" class="">Irrelevant Features</h2></div><div style="display:contents" dir="auto"><p id="27c682cb-1765-80d2-b1d2-e657f09520e1" class="">As the saying goes: garbage in, garbage out. Your system will only be capable of learning if the training data contains enough relevant features and not too many irrelevant ones. A critical part of the success of a Machine Learning project is coming up with a good set of features to train on. This process is called <em><strong>feature engineering, </strong></em>involves:</p></div><div style="display:contents" dir="auto"><ul id="27c682cb-1765-8026-afd4-fdf2e179a51f" class="bulleted-list"><li style="list-style-type:disc"><em><strong>Feature Selection</strong></em><em>:  </em>selecting the most useful feature<em> </em>to train on among existing features.</li></ul></div><div style="display:contents" dir="auto"><ul id="27c682cb-1765-8075-b4cd-f54e106a1232" class="bulleted-list"><li style="list-style-type:disc"><em><strong>Feature Extraction</strong></em><em>: </em>combining existing features to produce a more useful one (as we saw earlier, dimensionality reduction algorithms reduction algorithms can help).</li></ul></div><div style="display:contents" dir="auto"><ul id="27c682cb-1765-8010-b350-e6c123b7282a" class="bulleted-list"><li style="list-style-type:disc">Creating a new features by gathering new data.</li></ul></div><div style="display:contents" dir="auto"><hr id="27c682cb-1765-809e-bc14-e56fea8d596e"/></div><div style="display:contents" dir="auto"><p id="27c682cb-1765-80cc-bf4f-ff95604f04a3" class="">Now that we have a looked at the examples of bad data. Let’s look at a couple of examples of bad algorithms.</p></div><div style="display:contents" dir="auto"><hr id="27c682cb-1765-800e-b008-f3b63e28a341"/></div><div style="display:contents" dir="auto"><h2 id="27c682cb-1765-80ac-9514-dbbef08c7ddf" class="">Overfitting the Training Data</h2></div><div style="display:contents" dir="auto"><p id="27c682cb-1765-803c-8644-f0e3d1d9980f" class="">Say you are visiting a foreign country and the taxi driver rips you off. You might be tempted to say that <strong>all </strong>taxi drives in that country are thieves. Overgeneralization is something that we humans do all too often, and unfortunately machines can fall into the same trap if we are not careful.</p></div><div style="display:contents" dir="auto"><p id="27c682cb-1765-80cb-8056-e76ef7d03c01" class="">In Machine Learning this is called <em><strong>overfitting: </strong></em>it means that the model performs well on the training data, but it does not generalize well.</p></div><div style="display:contents" dir="auto"><p id="27c682cb-1765-8099-97c8-cd534558df5f" class="">The figure below shows an example of high-degree polynomial life satisfaction model that strongly overfits the training data. Even though it performs much better on the training data than the simple linear model, would you really trust its predictions ?</p></div><div style="display:contents" dir="ltr"><figure id="27c682cb-1765-80c8-bb57-c7467ce5038d" class="image"><a href="1.22_Overfitting.jpeg"><img style="width:709.953125px" src="1.22_Overfitting.jpeg"/></a></figure></div><div style="display:contents" dir="auto"><p id="27c682cb-1765-803d-8c63-fb917ae0dd25" class="">Complex models such as deep neural networks can detect subtle patterns in the data, but if the training set is noisy, or if it is too small (which introduces sampling noise), then the model is likely to detect patterns in the the noise itself. Obviously these patterns will not generalize to new instances.</p></div><div style="display:contents" dir="auto"><p id="27c682cb-1765-803c-ab3d-e7737fe6acc1" class="">For example, say you feed your life satisfaction model many more attributes, including uninformative ones such as the country’s name. In that case, a complex model may detect patterns like the fact that all countries in training data a, w in their names have life satisfaction greater than 7: New Zealand (7,3), Norway(7,4), Sweden(7,2), and Switzerland(7,5). How confident are you that the W-satisfaction rule generalizes to Rwanda or Zimbabwe? Obviously this pattern occurred in the training data by pure chance, but the model has no way to tell whether a pattern is real or simple the result of noise in the data.</p></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="27c682cb-1765-8049-a656-d1b1b1754f79"><div style="font-size:1.5em"><span class="icon">🐾</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="27c682cb-1765-807b-b888-c39960da9480" class="">Overfitting happens when the model is too complex relative to the amount and noisiness of the training data. The possible solutions are:</p></div><div style="display:contents" dir="auto"><ul id="27c682cb-1765-80e2-af47-f1372cc91841" class="bulleted-list"><li style="list-style-type:disc">To simplify the model by selecting one with fewer parameters (e.g., a linear model rather than a high-degree polynomial model), by reducing  the number of attributes in the training data or by constraining the model.</li></ul></div><div style="display:contents" dir="auto"><ul id="27c682cb-1765-80de-965f-f03cb9b1b512" class="bulleted-list"><li style="list-style-type:disc">To gather more training data.</li></ul></div><div style="display:contents" dir="auto"><ul id="27c682cb-1765-805d-9afb-d8f40a612071" class="bulleted-list"><li style="list-style-type:disc">To reduce the noise in the training data (e.g., fix data errors and remove outliers).</li></ul></div></div></figure></div><div style="display:contents" dir="auto"><h3 id="27c682cb-1765-809c-8f3c-c5383df84686" class="">Regularization</h3></div><div style="display:contents" dir="auto"><p id="27c682cb-1765-80f6-bd01-fb9dadcd6c83" class="">Containing a model to make it simpler and reduce the risk of overfitting is called Regularization. For example, the linear model we defined earlier has two parameters, <strong>θ0 and θ1. </strong>This gives the learning algorithm two degrees of freedom to adapt the model to the training data: it can tweak both the height (<strong>θ0</strong>) and the slope (<strong>θ1</strong>) of the line. If we forced <strong>θ1 = 0,</strong> the algorithm would have only one degree of freedom and would have a much harder time fitting the data properly: all it could is move the line up or down to get as close as possible to training instances, so it would end up around the mean. A very simple model indeed! If we allow the algorithm will effectively have somewhere in between one and two degrees of freedom. It will produce a simpler model than with two degrees of freedom, but more complex than with just one. You want to find the right balance between fitting the data perfectly and keeping the model simple enough to ensure that it will generalize well.</p></div><div style="display:contents" dir="auto"><hr id="27c682cb-1765-80e9-b2e0-d7f782e74536"/></div><div style="display:contents" dir="auto"><h1 id="275682cb-1765-803b-945d-f2a7c4a65488" class="">Version Spaces</h1></div><div style="display:contents" dir="auto"><hr id="279682cb-1765-8004-8cd5-d0aff0db5c39"/></div><div style="display:contents" dir="auto"><h2 id="279682cb-1765-805e-a177-ce79c8586ba1" class="">Hypothesis Space (H)</h2></div><div style="display:contents" dir="auto"><p id="279682cb-1765-8087-94ad-d12823393da6" class="">The hypothesis space is the set of all hypotheses that a learning algorithm can possibly choose from, based on its representation. A hypothesis is a possible explanation for the target function you’re trying to learn.</p></div><div style="display:contents" dir="auto"><ul id="279682cb-1765-806c-83ee-f532c70835cd" class="bulleted-list"><li style="list-style-type:disc">Formal Definition: <div style="display:contents" dir="auto"><ul id="279682cb-1765-80be-b975-ecd8a99e568a" class="bulleted-list"><li style="list-style-type:circle">If X is the set of instances (input data points), and each hypothesis is a function h:x→{0,1}, then the hypothesis space H is the set of all such functions that the learning algorithm considers.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="279682cb-1765-8067-9d29-ca82c9141bd8" class="">example:<div class="indented"><div style="display:contents" dir="auto"><p id="279682cb-1765-80db-8f89-e505baddf168" class="">If your instances are descriptions of animals, a hypothesis might be:</p></div><div style="display:contents" dir="auto"><blockquote id="279682cb-1765-8087-a124-f9e04af44b23" class="">IF animal has feathers AND lays eggs THEN animal is a bird.</blockquote></div></div></p></div><div style="display:contents" dir="auto"><hr id="279682cb-1765-808f-853f-f4b8bbb8fef7"/></div><div style="display:contents" dir="auto"><h3 id="279682cb-1765-801d-b71d-dd483b212eb6" class="">Finite Hypothesis Space:</h3></div><div style="display:contents" dir="auto"><ul id="279682cb-1765-8089-86ff-e40480514699" class="bulleted-list"><li style="list-style-type:disc">The number of hypothesis in H is finite.</li></ul></div><div style="display:contents" dir="auto"><ul id="279682cb-1765-80b2-be1f-e249998b14e4" class="bulleted-list"><li style="list-style-type:disc">example: <div style="display:contents" dir="auto"><p id="279682cb-1765-801b-9217-cf04817d8676" class="">If you have 3 binary features (e.g., color, size, weight), and you’re using conjunctions of feature values, you may only have a small, countable number of hypotheses.</p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="279682cb-1765-80a4-96b4-e6fff61a939d" class="bulleted-list"><li style="list-style-type:disc">Importance: Finite space allow for exhaustive enumeration, easier analysis, and are computationally tractable.</li></ul></div><div style="display:contents" dir="auto"><hr id="279682cb-1765-804c-a626-e68e6f91595d"/></div><div style="display:contents" dir="auto"><h3 id="279682cb-1765-803a-b58a-f83b86ec6ede" class="">Infinite Hypothesis Space:</h3></div><div style="display:contents" dir="auto"><ul id="279682cb-1765-80d1-8be9-d817023d6271" class="bulleted-list"><li style="list-style-type:disc">The number of hypothesis in H is infinite.</li></ul></div><div style="display:contents" dir="auto"><ul id="279682cb-1765-8004-8a0a-eeb2f35f939e" class="bulleted-list"><li style="list-style-type:disc">Can be countably infinite, example: All integer linear classifier, or uncountably infinite eg. all possible real-valued weights in neural networks.</li></ul></div><div style="display:contents" dir="auto"><ul id="279682cb-1765-80a7-8c53-f954e54a7ee2" class="bulleted-list"><li style="list-style-type:disc">Importance: Infinite hypothesis spaces are more expressive, but can lead to overfitting and require regularization/generalization techniques.</li></ul></div><div style="display:contents" dir="auto"><hr id="279682cb-1765-804f-861f-e9972e07f943"/></div><div style="display:contents" dir="auto"><h2 id="279682cb-1765-80f3-b6cc-d583c446c830" class="">Version Spaces (VS)</h2></div><div style="display:contents" dir="auto"><p id="279682cb-1765-80d0-b344-ce367f76e97c" class="">The version space is the subset of the hypothesis space that is consistent with the training data.</p></div><div style="display:contents" dir="auto"><ul id="279682cb-1765-80c7-9e86-c2f3d9255f55" class="bulleted-list"><li style="list-style-type:disc">Definition:<div style="display:contents" dir="auto"><ul id="279682cb-1765-803f-a46e-e98fd2e9e533" class="bulleted-list"><li style="list-style-type:circle">Given:<div style="display:contents" dir="auto"><ul id="279682cb-1765-80cb-bcbf-f3db7295b8e1" class="bulleted-list"><li style="list-style-type:square">Hypothesis space H</li></ul></div><div style="display:contents" dir="auto"><ul id="279682cb-1765-8037-9c73-d1c42ea05491" class="bulleted-list"><li style="list-style-type:square">Training data D = {(x1,y1),(x2,y2,)…..(xn,yn)}</li></ul></div><div style="display:contents" dir="auto"><p id="279682cb-1765-8073-935b-e476aa1104df" class="">The version space is</p></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><figure id="279682cb-1765-80bb-b390-d7c31af8c1a5" class="equation"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>V</mi><msub><mi>S</mi><mi>H</mi></msub><msub><mo separator="true">,</mo><mi>D</mi></msub><mo>=</mo><mo stretchy="false">{</mo><mi>h</mi><mo>∈</mo><mi>H</mi><mo>∣</mo><mi mathvariant="normal">∀</mi><mo stretchy="false">(</mo><mi>x</mi><mi>i</mi><mo separator="true">,</mo><mi>y</mi><mi>i</mi><mo stretchy="false">)</mo><mo>∈</mo><mi>D</mi><mo separator="true">,</mo><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mi>i</mi><mo stretchy="false">)</mo><mo>=</mo><mi>y</mi><mi>i</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">VS_H,_D= \{h∈H∣∀(xi,yi)∈D,h(xi)=yi\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.08125em;">H</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct"><span class="mpunct">,</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">D</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathnormal">h</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∀</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">h</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord mathnormal">i</span><span class="mclose">}</span></span></span></span></span></div></figure></div><div style="display:contents" dir="auto"><hr id="279682cb-1765-80ed-8203-dab14cc23231"/></div><div style="display:contents" dir="auto"><h3 id="279682cb-1765-801a-9af8-dfbce135a0a5" class="">Version Space Representation</h3></div><div style="display:contents" dir="auto"><p id="279682cb-1765-809b-b078-fffc663683fd" class="">In the Candidate Elimination Algorithm, The version space is represented using:</p></div><div style="display:contents" dir="auto"><ul id="279682cb-1765-8002-af34-f24d553ee92a" class="bulleted-list"><li style="list-style-type:disc">S: The set of maximally specific hypotheses consistent with the data</li></ul></div><div style="display:contents" dir="auto"><ul id="279682cb-1765-80ad-b374-f4ce0c33944d" class="bulleted-list"><li style="list-style-type:disc">G: The set of maximally general hypotheses consistent with the data</li></ul></div><div style="display:contents" dir="auto"><ul id="279682cb-1765-80e7-af10-cdef04b9ba17" class="bulleted-list"><li style="list-style-type:disc">The version space is:<div style="display:contents" dir="auto"><figure id="279682cb-1765-8050-8dc4-e123f0830984" class="equation"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>V</mi><mi>S</mi><mo>=</mo><mo stretchy="false">{</mo><mi>h</mi><mo>∈</mo><mi>H</mi><mo>∣</mo><mi mathvariant="normal">∃</mi><mi>s</mi><mo>∈</mo><mi>S</mi><mo separator="true">,</mo><mi>g</mi><mo>∈</mo><mi>G</mi><mtext> </mtext><mi>s</mi><mi>u</mi><mi>c</mi><mi>h</mi><mtext> </mtext><mi>t</mi><mi>h</mi><mi>a</mi><mi>t</mi><mtext> </mtext><mi>s</mi><mo>≤</mo><mi>h</mi><mo>≤</mo><mi>g</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">VS= \{h∈H∣∃s∈S,g∈G~ such~ that~ s≤h≤g\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathnormal">h</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord">∃</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8304em;vertical-align:-0.136em;"></span><span class="mord mathnormal">G</span><span class="mspace nobreak"> </span><span class="mord mathnormal">s</span><span class="mord mathnormal">u</span><span class="mord mathnormal">c</span><span class="mord mathnormal">h</span><span class="mspace nobreak"> </span><span class="mord mathnormal">t</span><span class="mord mathnormal">ha</span><span class="mord mathnormal">t</span><span class="mspace nobreak"> </span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8304em;vertical-align:-0.136em;"></span><span class="mord mathnormal">h</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mclose">}</span></span></span></span></span></div></figure></div><div style="display:contents" dir="auto"><p id="279682cb-1765-807f-b761-f01a272bdd52" class="">This representation allows you to avoid enumerating all hypotheses and instead maintain just the boundaries</p></div></li></ul></div><div style="display:contents" dir="auto"><hr id="279682cb-1765-8065-917b-e416f249f2aa"/></div><div style="display:contents" dir="auto"><h3 id="279682cb-1765-80d1-988a-f726e02afacc" class="">Why version space matter</h3></div><div style="display:contents" dir="auto"><ul id="279682cb-1765-807f-984d-f38a5ed090ff" class="bulleted-list"><li style="list-style-type:disc">Helps <strong>understand what the learner knows</strong> and what it still could be.</li></ul></div><div style="display:contents" dir="auto"><ul id="279682cb-1765-8014-941b-f0b87dd66221" class="bulleted-list"><li style="list-style-type:disc">Useful in <strong>active learning</strong>, where the learner can query new examples to eliminate portions of the version space.</li></ul></div><div style="display:contents" dir="auto"><ul id="279682cb-1765-8004-abc2-e45f2ae09bc2" class="bulleted-list"><li style="list-style-type:disc">Gives insight into <strong>bias </strong>and <strong>expressiveness </strong>of the learning algorithm.</li></ul></div><div style="display:contents" dir="auto"><hr id="279682cb-1765-8037-81e4-f4e0a2fd35b9"/></div><div style="display:contents" dir="auto"><p id="279682cb-1765-8075-9979-d7bf3e9de224" class="">Summary Table of Version space:</p></div><div style="display:contents" dir="ltr"><table id="279682cb-1765-8085-87f8-d8824811446a" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="279682cb-1765-806b-99e4-c3a14e22a85c"><td id="MF&lt;c" class="" style="width:353.5px">Concept</td><td id="OZxo" class="" style="width:353.5px">Description</td></tr></div><div style="display:contents" dir="ltr"><tr id="279682cb-1765-804c-91a4-fc28a73ea6ab"><td id="MF&lt;c" class="" style="width:353.5px">Hypothesis Space (H)</td><td id="OZxo" class="" style="width:353.5px">All possible hypotheses a learner can choose from</td></tr></div><div style="display:contents" dir="ltr"><tr id="279682cb-1765-80aa-b2df-e931c73fe7a8"><td id="MF&lt;c" class="" style="width:353.5px">Finite H</td><td id="OZxo" class="" style="width:353.5px">A limited number of hypotheses (e.g., all boolean function over 3 features)</td></tr></div><div style="display:contents" dir="ltr"><tr id="279682cb-1765-803f-9804-e97d4dac6ce6"><td id="MF&lt;c" class="" style="width:353.5px">Infinite H</td><td id="OZxo" class="" style="width:353.5px">Infinite number of hypotheses (e.g., all linear classifiers)</td></tr></div><div style="display:contents" dir="ltr"><tr id="279682cb-1765-80c1-868d-e7d07dd5af24"><td id="MF&lt;c" class="" style="width:353.5px">Version Space (VS)</td><td id="OZxo" class="" style="width:353.5px">Subset of H consistent with observed training data</td></tr></div><div style="display:contents" dir="ltr"><tr id="279682cb-1765-801e-9d90-eb96c10a02d3"><td id="MF&lt;c" class="" style="width:353.5px">S boundary</td><td id="OZxo" class="" style="width:353.5px">Most specific consistent hypotheses</td></tr></div><div style="display:contents" dir="ltr"><tr id="279682cb-1765-809d-a268-d76d9d80cada"><td id="MF&lt;c" class="" style="width:353.5px">G boundary</td><td id="OZxo" class="" style="width:353.5px">Most general consistent hypotheses</td></tr></div></tbody></table></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

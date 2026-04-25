@@ -1,0 +1,12 @@
+{
+  "subjects": {
+    "machine-learning-ai": {
+      "name": "Machine Learning / AI",
+      "description": "Foundations, workflows, and practical concepts across machine learning and applied AI."
+    },
+    "internet-of-things": {
+      "name": "Internet of Things",
+      "description": "Foundations, workflows, and practical concepts across IoT development and applications."
+    }
+  }
+}

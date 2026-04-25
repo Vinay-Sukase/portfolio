@@ -1,0 +1,752 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Unit 4 - AML</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="26f682cb-1765-80e5-9498-d99ee0f8a8b1" class="page sans"><header><h1 class="page-title" dir="auto">Unit 4 - AML</h1><p class="page-description" dir="auto"></p><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>Tags</th><td><span class="selected-value select-value-color-blue">AML</span></td></tr></tbody></table></header><div class="page-body"><div style="display:contents" dir="auto"><h1 id="2de682cb-1765-80a0-aca6-f0a93ed64c38" class="">Ensemble Learning : </h1></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-8013-8648-e897632278a0" class=""><a href="https://en.wikipedia.org/wiki/Ensemble_learning">Ensemble learning</a> is a machine learning methodology that combines predictions from multiple models.</p></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-800c-89fd-c56b512e5fab" class="">The method uses a weak learner model to produce the final prediction to improve the model performance.</p></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80da-a11b-e477cd8ef207" class="">The ensemble concept is to combine individual weaker models and collectively become a strong learner.</p></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80f5-a48c-da62a04b1a57" class="">There are a few ensemble methods, but we would focus on the most popular and valuable:</p></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-808d-ae3b-ec2203508ecd" class="bulleted-list"><li style="list-style-type:disc">Bagging</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8092-a5c1-dc76755b7a96" class="bulleted-list"><li style="list-style-type:disc">Boosting</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8049-8007-d19a63b63435" class="bulleted-list"><li style="list-style-type:disc">Stacking</li></ul></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80b2-beca-d56f69c885c9" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8086-b0b0-c4e7a41bf831"/></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8033-965c-de05488cfd75"/></div><div style="display:contents" dir="auto"><h2 id="2de682cb-1765-8005-9ac6-e0ee9dcb2fb7" class=""><strong>Bagging (Bootstrap Aggregating)</strong></h2></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-8023-b4f2-c9ce2f24592d" class=""><strong>Bagging</strong>, short for <strong>Bootstrap Aggregating</strong>, is an <strong>ensemble learning technique</strong> used to improve the <strong>stability, accuracy, and generalization</strong> of machine learning models. It works by training <strong>multiple independent models</strong> on different subsets of the training data and then <strong>aggregating their predictions</strong> to produce a final output.</p></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80f4-871f-ce71dca1626f" class="">Bagging is particularly effective for <strong>high-variance models</strong>, such as <strong>decision trees</strong>, where small changes in training data can lead to very different models.</p></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80f3-91ea-dc9ada5f9ce4" class="">For example:</p></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-806b-a7c4-ee90d5fcdb9f" class="bulleted-list"><li style="list-style-type:disc">Instead of training <strong>one decision tree</strong> on the entire dataset, bagging trains <strong>many decision trees</strong> on different randomly sampled datasets and combines their outputs.</li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-80d0-85ce-ff6acc01a0b3"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-808e-89c7-fdf89539ab94" class=""><strong>Core Idea of Bagging</strong></h3></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-801e-9d17-c7bc09f1c346" class="bulleted-list"><li style="list-style-type:disc">Create <strong>multiple versions of the training dataset</strong> using <strong>bootstrap sampling</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-804b-aa15-cb1c56f49a1c" class="bulleted-list"><li style="list-style-type:disc">Train a <strong>separate model</strong> on each dataset</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8077-9526-e96b55f4ea80" class="bulleted-list"><li style="list-style-type:disc">Combine all model predictions to obtain a <strong>robust final prediction</strong></li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-804e-aaad-fcfbb946521d"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-808a-8dc1-c8c3fb795bb5" class="">Conceptual Working </h3></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80cc-970f-d5c12e0422b0" class="">
+</p></div><div style="display:contents" dir="ltr"><figure id="2de682cb-1765-8030-8cc8-fd699c9b5b70" class="image"><a href="https://substackcdn.com/image/fetch/$s_!ZJI9!,w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F42deeaf4-d127-4c9e-92b2-fa22916e73fb_2200x947.png"><img src="https://substackcdn.com/image/fetch/$s_!ZJI9!,w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F42deeaf4-d127-4c9e-92b2-fa22916e73fb_2200x947.png"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8072-949e-c374b4239c9c"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-8067-9cbb-e8aacc312f12" class=""><strong>Bootstrap Sampling</strong></h3></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-8012-a779-f76d8834068d" class="">Bootstrap sampling means:</p></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80b1-b723-f95b3fb209ad" class="bulleted-list"><li style="list-style-type:disc">Sampling <strong>with replacement</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8048-a177-c00fa0286983" class="bulleted-list"><li style="list-style-type:disc">Each bootstrap dataset has the <strong>same size</strong> as the original dataset</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-802f-b33f-eac20e2a884c" class="bulleted-list"><li style="list-style-type:disc">Some samples may appear multiple times, while some may not appear at all</li></ul></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-802e-bcb6-e06ccfd2545b" class="">This introduces <strong>diversity</strong> among the models.</p></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8081-a536-fc36ef98084b"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-8000-8864-d2e69b3d512e" class=""><strong>Algorithm Steps (Bagging Algorithm)</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-8094-a5f5-c3e69893e53a" class="numbered-list" start="1"><li>Given a training dataset of size <style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span><span>﻿</span></span></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-803e-94b4-fed77a84b9d5" class="numbered-list" start="2"><li>Generate <style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span></span><span>﻿</span></span> bootstrap samples by sampling <strong>with replacement</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-8030-93bc-c973e01101da" class="numbered-list" start="3"><li>Train one base learner on each bootstrap sample</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-80d0-abb9-e4258de951ce" class="numbered-list" start="4"><li>For prediction:<div style="display:contents" dir="auto"><ul id="2de682cb-1765-8028-b3f5-f63e2e5a6e5b" class="bulleted-list"><li style="list-style-type:disc"><strong>Classification</strong> → Majority voting</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80ce-9028-cba93d267d9c" class="bulleted-list"><li style="list-style-type:disc"><strong>Regression</strong> → Averaging predictions</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8005-adb9-dfb0618b4e7e"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-802c-a3bc-d1b1ac092043" class=""><strong>Mathematical Formulation</strong></h3></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80c4-8be2-f7c3182d9634" class="">Let:</p></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80f1-b854-d80937153619" class="bulleted-list"><li style="list-style-type:disc"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><msub><mi>f</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>f</mi><mi>B</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f_1(x), f_2(x), \ldots, f_B(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1076em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1076em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1076em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span> be predictions from <style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span></span><span>﻿</span></span> models</li></ul></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80b1-8495-cfa3ae0e140c" class=""><strong>Final prediction (Regression): </strong></p></div><div style="display:contents" dir="auto"><figure id="2de682cb-1765-8030-83ea-d95ffef8375f" class="equation"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mn>1</mn><mi>B</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>B</mi></munderover><msub><mi>f</mi><mi>i</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(x)= \frac{1}{B} \sum^{B}_{i=1} f_i (x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:3.106em;vertical-align:-1.2777em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.1076em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span></div></figure></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-805c-bea7-dff0fef272e0" class=""><strong>Final prediction (Classification):</strong></p></div><div style="display:contents" dir="auto"><figure id="2de682cb-1765-80c0-a222-e9318f746670" class="equation"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mtext>mode</mtext><mo stretchy="false">{</mo><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><msub><mi>f</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>f</mi><mi>B</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">f(x) = \text{mode}\{f_1(x), f_2(x), \ldots, f_B(x)\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">mode</span></span><span class="mopen">{</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1076em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1076em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1076em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)}</span></span></span></span></span></div></figure></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8041-b417-f7fda47015c8"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80ae-a528-f8be9607eb8d" class=""><strong>Advantages of Bagging</strong></h3></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80d3-81ef-e0f24a6a1dbd" class="bulleted-list"><li style="list-style-type:disc">Reduces overfitting</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80a3-af36-e0fb7af0419e" class="bulleted-list"><li style="list-style-type:disc">Improves model stability</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8052-90db-e4690bf2bf11" class="bulleted-list"><li style="list-style-type:disc">Parallel training possible</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8025-9a7d-f2c799087fe2" class="bulleted-list"><li style="list-style-type:disc">Works well with decision trees</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80aa-a29f-fa976bf4ca38" class="bulleted-list"><li style="list-style-type:disc">Simple and intuitive</li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-80ba-99aa-f88cc4ae2782"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-8021-99a9-c8d13802c715" class=""><strong>Disadvantages of Bagging</strong></h3></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80c2-bbf9-d1a6e2660a08" class="bulleted-list"><li style="list-style-type:disc">Does not significantly reduce bias</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8018-8509-c6dd7717e80a" class="bulleted-list"><li style="list-style-type:disc">Computationally expensive</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80a7-a1d6-c4b71680dda1" class="bulleted-list"><li style="list-style-type:disc">Less effective for low-variance models (e.g., linear regression)</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80b0-96c0-f9d217195cd1" class="bulleted-list"><li style="list-style-type:disc">Reduced interpretability</li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8095-9bd0-cef3babefaca"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80c4-ac2a-d32fd09fdeca" class=""><strong>Applications of Bagging</strong></h3></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80b9-b086-c443b0406272" class="bulleted-list"><li style="list-style-type:disc">Random Forest (most popular application)</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80a4-841d-e7d5f9fc1850" class="bulleted-list"><li style="list-style-type:disc">Credit risk prediction</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80cf-8a19-fa4465f5d9e5" class="bulleted-list"><li style="list-style-type:disc">Medical diagnosis</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80d7-b02b-ef414303f6e5" class="bulleted-list"><li style="list-style-type:disc">Spam detection</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8058-84e7-d3735a01dc19" class="bulleted-list"><li style="list-style-type:disc">Stock market analysis</li></ul></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80b8-b83b-d8d1f67a0949" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8051-b118-e5301c6138e0"/></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8069-a71a-c45fa5a907e6"/></div><div style="display:contents" dir="auto"><h2 id="2de682cb-1765-8093-8d11-ee4686093596" class=""><strong>Random Forest</strong></h2></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-803d-80ca-e541bc1348e9" class=""><strong>Random Forest</strong> is a powerful <strong>ensemble learning algorithm</strong> used for both <strong>classification and regression</strong> tasks. It is based on the idea of <strong>Bagging (Bootstrap Aggregating)</strong> and works by constructing a <strong>large number of decision trees</strong> during training and combining their outputs to produce a <strong>more accurate and stable prediction</strong>.</p></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-808c-8054-f613f267531b" class="">Instead of relying on a single decision tree (which may overfit), Random Forest builds <strong>multiple decision trees</strong> and aggregates their predictions, thereby reducing <strong>variance</strong> and improving <strong>generalization</strong>.</p></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80ce-a399-e182721d8a62" class="">For example:</p></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-804b-ab97-fbed77531d11" class="bulleted-list"><li style="list-style-type:disc">Instead of using <strong>one decision tree</strong> to predict whether a patient has a disease, Random Forest uses <strong>hundreds of trees</strong>, each trained on different subsets of data and features, and then takes a <strong>majority vote</strong>.</li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8028-bc11-cc8c492e6e2b"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-802b-97b0-fcb78183b4b6" class="">Conceptual Working</h3></div><div style="display:contents" dir="ltr"><figure id="2de682cb-1765-8075-9d45-e53a0172e0f4" class="image"><a href="Random-Forest.png"><img style="width:600px" src="Random-Forest.png"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-809b-92f9-c78778359968"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80b0-99c2-f0ef8bac2872" class=""><strong>Core Idea of Random Forest</strong></h3></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8078-8820-cc1c1950461d" class="bulleted-list"><li style="list-style-type:disc">Use <strong>Bagging</strong> to create multiple bootstrap datasets</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8087-a31d-f1671de2cb3e" class="bulleted-list"><li style="list-style-type:disc">Train a <strong>decision tree</strong> on each dataset</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80be-b2e9-e1d6e2d3c18d" class="bulleted-list"><li style="list-style-type:disc">At each split, consider only a <strong>random subset of features</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80af-9bcc-ddddaddbcab6" class="bulleted-list"><li style="list-style-type:disc">Combine predictions of all trees</li></ul></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80c4-a67f-cbe03d435da6" class="">This dual randomness (data + features) makes Random Forest <strong>robust and accurate</strong>.</p></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-80d5-8924-e5e125d835ab"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80eb-b782-dce4eed8157b" class=""><strong>Algorithm Steps (Random Forest Algorithm)</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-80b1-87b7-c2a3142f759d" class="numbered-list" start="1"><li>Given a training dataset of size <style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span><span>﻿</span></span></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-8079-b474-fc54bea3f4ee" class="numbered-list" start="2"><li>Create <style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span></span><span>﻿</span></span> bootstrap samples by sampling <strong>with replacement</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-809c-9aa6-ee2cae07637e" class="numbered-list" start="3"><li>For each bootstrap sample:<div style="display:contents" dir="auto"><ul id="2de682cb-1765-80d1-b2a2-fda0bc8241e9" class="bulleted-list"><li style="list-style-type:disc">Train a <strong>decision tree</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80a4-baf8-e458c907ec03" class="bulleted-list"><li style="list-style-type:disc">At each node, select a <strong>random subset of features</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-805a-8220-d2c6971f7a26" class="bulleted-list"><li style="list-style-type:disc">Choose the best split among those features</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-8049-ab1e-eec30095d834" class="numbered-list" start="4"><li>Repeat until all trees are built</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-80e8-9539-fe85e248ad93" class="numbered-list" start="5"><li>Final prediction:<div style="display:contents" dir="auto"><ul id="2de682cb-1765-8097-af9b-f129e162e08c" class="bulleted-list"><li style="list-style-type:disc"><strong>Classification</strong> → Majority voting</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-803a-a30f-da0503ad691f" class="bulleted-list"><li style="list-style-type:disc"><strong>Regression</strong> → Average of predictions</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8045-8c59-e5d2e6439cc3"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80c8-ac1b-dd35b358d92f" class=""><strong>Key Characteristics of Random Forest</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-8008-9343-d53145688717" class="numbered-list" start="1"><li><strong>Ensemble of Decision Trees</strong><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80f7-8f69-f23b6cfd0c7d" class="bulleted-list"><li style="list-style-type:disc">Uses many trees instead of one</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-800b-be64-d2a3257f5532" class="numbered-list" start="2"><li><strong>Bootstrap Sampling</strong><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8034-b66b-f33be682601a" class="bulleted-list"><li style="list-style-type:disc">Each tree trained on a different dataset</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-8060-9eda-c0f207119dc1" class="numbered-list" start="3"><li><strong>Random Feature Selection</strong><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80b4-bdaa-ed9a0c71e5e1" class="bulleted-list"><li style="list-style-type:disc">Only a subset of features considered at each split</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-80a9-a152-e3ce80760255" class="numbered-list" start="4"><li><strong>Low Correlation Between Trees</strong><div style="display:contents" dir="auto"><ul id="2de682cb-1765-802d-b097-e7c58acaba99" class="bulleted-list"><li style="list-style-type:disc">Improves ensemble performance</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-80d3-ac0b-d6379ac8e984" class="numbered-list" start="5"><li><strong>Out-of-Bag (OOB) Error Estimation</strong><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8087-afd6-de838ed0cab9" class="bulleted-list"><li style="list-style-type:disc">Uses unused samples to estimate error without validation set</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8005-a4b1-fc59aeccf5c2"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-8026-af13-fd2b718e52d7" class=""><strong>Worked Example</strong></h3></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80e5-abcc-dc29a338b394" class="">Suppose we want to predict whether a <strong>loan will be approved (Yes/No)</strong>.</p></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-8025-88cf-fc35eb84c56b" class="numbered-list" start="1"><li>Dataset contains features:<div style="display:contents" dir="auto"><ul id="2de682cb-1765-8032-8c18-c41437ab2530" class="bulleted-list"><li style="list-style-type:disc">Income, Credit Score, Age, Employment Type</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-8034-8de1-c30e2fd2f20f" class="numbered-list" start="2"><li>Random Forest builds <strong>100 decision trees</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-80a0-b652-f21dbb3ed7fa" class="numbered-list" start="3"><li>Each tree is trained on a different bootstrap sample</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-8036-8812-d3565e822aad" class="numbered-list" start="4"><li>For a new applicant:</li></ol></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-8031-a6b9-c7e80565d82b" class="">
+</p></div><div style="display:contents" dir="ltr"><table id="2de682cb-1765-807d-bbbf-d99ae0a52f54" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2de682cb-1765-8093-bfb4-f81bc3f5b423"><th id=";iku" class="simple-table-header-color simple-table-header">Tree</th><th id="euBr" class="simple-table-header-color simple-table-header">Prediction</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2de682cb-1765-807d-81d7-d81cb94a1901"><td id=";iku" class="">Tree 1</td><td id="euBr" class="">Yes</td></tr></div><div style="display:contents" dir="ltr"><tr id="2de682cb-1765-803f-bc8b-e7ab8eb4f921"><td id=";iku" class="">Tree 2</td><td id="euBr" class="">No</td></tr></div><div style="display:contents" dir="ltr"><tr id="2de682cb-1765-80a8-b557-fe3f8b561e9b"><td id=";iku" class="">Tree 3</td><td id="euBr" class="">Yes</td></tr></div><div style="display:contents" dir="ltr"><tr id="2de682cb-1765-80d1-846d-f71d60993a99"><td id=";iku" class="">Tree 4</td><td id="euBr" class="">Yes</td></tr></div><div style="display:contents" dir="ltr"><tr id="2de682cb-1765-806c-b5a2-d2070bec216f"><td id=";iku" class="">Tree 5</td><td id="euBr" class="">Yes</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80ef-8b94-eb9452a26a2d" class="">Final Prediction = <strong>Yes</strong> (majority vote)</p></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8048-846d-da0d55d808ed"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80dc-9101-c90e4dfbb3ed" class=""><strong>Important Hyperparameters</strong></h3></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80d6-a1df-f418b92755aa" class="bulleted-list"><li style="list-style-type:disc">Number of trees <style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>n</mi><mrow><mi>e</mi><mi>s</mi><mi>t</mi><mi>i</mi><mi>m</mi><mi>a</mi><mi>t</mi><mi>o</mi><mi>r</mi><mi>s</mi></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(n_{estimators})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">es</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">ima</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">ors</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8046-9b4c-ebedcb5cbbab" class="bulleted-list"><li style="list-style-type:disc">Maximum depth of trees</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8009-92e6-dcb71901d979" class="bulleted-list"><li style="list-style-type:disc">Number of features per split</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8080-88da-fb9305be7c3d" class="bulleted-list"><li style="list-style-type:disc">Minimum samples per leaf</li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-80e7-af0c-fa4e692e801c"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80b6-89ff-c1b2ea204d62" class=""><strong>Advantages of Random Forest</strong></h3></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8028-91e2-f38ef608012c" class="bulleted-list"><li style="list-style-type:disc">High accuracy and robustness</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-800e-bb38-cee0315dd7c3" class="bulleted-list"><li style="list-style-type:disc">Handles large datasets and high-dimensional data</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80c4-8ed9-c70b3ed817b5" class="bulleted-list"><li style="list-style-type:disc">Reduces overfitting compared to decision trees</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80d0-bdb3-f298984cc04f" class="bulleted-list"><li style="list-style-type:disc">Works well with nonlinear data</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80de-bd95-c951504c3fd0" class="bulleted-list"><li style="list-style-type:disc">Resistant to noise and outliers</li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8027-a347-f6e8a9a00d9c"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-8004-927d-d782df950f92" class=""><strong>Disadvantages of Random Forest</strong></h3></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8081-9879-d859dacdd556" class="bulleted-list"><li style="list-style-type:disc">Computationally expensive</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8033-ac60-cf3503a72bc0" class="bulleted-list"><li style="list-style-type:disc">Less interpretable than a single decision tree</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80c2-afe6-c3dcd8d817ba" class="bulleted-list"><li style="list-style-type:disc">Requires more memory</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8062-86d0-c4e6b433e62b" class="bulleted-list"><li style="list-style-type:disc">Slower prediction time for large forests</li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-809c-afba-d8498895c2a9"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80a7-891c-d588a23854b2" class=""><strong>Applications of Random Forest</strong></h3></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-803d-81f7-d158b79e77f2" class="bulleted-list"><li style="list-style-type:disc">Medical diagnosis</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80fc-ac13-d0c46938637a" class="bulleted-list"><li style="list-style-type:disc">Credit risk analysis</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-800b-ac6f-dc62bc0ae650" class="bulleted-list"><li style="list-style-type:disc">Fraud detection</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8041-9e91-f81b81bba73f" class="bulleted-list"><li style="list-style-type:disc">Stock market prediction</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80e9-8343-ef299e2cdd74" class="bulleted-list"><li style="list-style-type:disc">Image and text classification</li></ul></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80f7-9cc6-f826f0beb535" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8001-a328-f0cfa914e0e4"/></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-80f7-8f98-f330185b187c"/></div><div style="display:contents" dir="auto"><h2 id="2de682cb-1765-80ed-a29e-cc3dd10d59c1" class=""><strong>Boosting</strong></h2></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-8044-a86d-d61b5b6f6327" class=""><strong>Boosting</strong> is an <strong>ensemble learning technique</strong> that improves the performance of machine learning models by <strong>combining multiple weak learners sequentially</strong> to form a <strong>strong learner</strong>. Unlike Bagging, where models are trained independently, Boosting trains models <strong>one after another</strong>, and each new model focuses more on the <strong>mistakes made by previous models</strong>.</p></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-8053-a000-d9fee3ca1325" class="">The central idea of Boosting is to <strong>convert many weak classifiers (slightly better than random guessing)</strong> into a highly accurate classifier by <strong>reweighting training samples</strong> and <strong>emphasizing hard-to-classify instances</strong>.</p></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80a0-9c26-df8326b05033" class="">For example:</p></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80fb-8adc-d98ed45d9c16" class="bulleted-list"><li style="list-style-type:disc">In a spam classification task, if early models misclassify certain emails, Boosting forces later models to pay <strong>more attention</strong> to those difficult emails.</li></ul></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80c8-a70d-df5df9846a29" class="">
+</p></div><div style="display:contents" dir="ltr"><figure id="2de682cb-1765-8073-9ba8-fee9e7ce6f08" class="image"><a href="https://substackcdn.com/image/fetch/$s_!6Bo2!,w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdc6331b3-3268-4b8c-9810-ea6f09bdf459_1528x1066.png"><img src="https://substackcdn.com/image/fetch/$s_!6Bo2!,w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdc6331b3-3268-4b8c-9810-ea6f09bdf459_1528x1066.png"/></a></figure></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80b7-9788-d46ca7076532" class=""><strong>Mathematical Intuition (AdaBoost-style)</strong></h3></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-808d-ad5c-c3849a03d8e9" class="">Final boosted classifier:</p></div><div style="display:contents" dir="auto"><figure id="2de682cb-1765-8078-ad97-f366b155d1e5" class="equation"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mi>T</mi></munderover><msub><mi>α</mi><mi>t</mi></msub><msub><mi>h</mi><mi>t</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(x) = \sum_{t=1}^{T} \alpha_t h_t(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:3.0954em;vertical-align:-1.2671em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283em;"><span style="top:-1.8829em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2671em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span></div></figure></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-8019-91ce-eaa5d9f48a41" class="">Where:</p></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80bc-a7b1-f4da352803c4" class="bulleted-list"><li style="list-style-type:disc"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>t</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">h_t(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span> = weak learner at iteration <style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span></span></span></span></span><span>﻿</span></span></li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-804b-b497-e917fdb8bf26" class="bulleted-list"><li style="list-style-type:disc"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\alpha_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> = weight assigned to learner <style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">h_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span><div style="display:contents" dir="auto"><p id="2de682cb-1765-807a-863c-e63196ed2ae9" class="">(higher if the learner is more accurate)</p></div></li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8003-afda-f7c59dc908d1"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-8021-99b5-fe226fe6473f" class=""><strong>Algorithm Steps (Boosting – Generic)</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-809d-ac2b-ea9c189269f0" class="numbered-list" start="1"><li>Assign equal weights to all training samples</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-80d3-8eec-d8f44acd0450" class="numbered-list" start="2"><li>Train the first weak classifier</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-80ce-aa56-d8f4ffaf128c" class="numbered-list" start="3"><li>Compute classification error</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-80c7-a571-efec4383f10c" class="numbered-list" start="4"><li>Increase weights of misclassified samples</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-8094-9f80-dd2fc13debf8" class="numbered-list" start="5"><li>Train the next classifier on reweighted data</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-8096-a969-cbbc4d679c2e" class="numbered-list" start="6"><li>Repeat steps 3–5 for multiple iterations</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-8014-97ab-e49106e65be0" class="numbered-list" start="7"><li>Combine all classifiers into a final strong classifier</li></ol></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8083-9c7b-d3fd9261aaf5"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-802c-8e77-d9d0c3d27cc4" class=""><strong>Worked Example</strong></h3></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80d5-b094-db6c3bfee50e" class="">Suppose we want to classify students as <strong>Pass / Fail</strong>.</p></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-800f-93b7-f4f838588e3d" class="bulleted-list"><li style="list-style-type:disc"><strong>Model 1</strong> misclassifies students with low attendance<div style="display:contents" dir="auto"><p id="2de682cb-1765-806d-bfd1-ee570bf8af77" class="">→ Increase weight of those students</p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8009-b8e9-e4615053476b" class="bulleted-list"><li style="list-style-type:disc"><strong>Model 2</strong> focuses more on attendance-related patterns</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80f4-a53d-cb7a954daeda" class="bulleted-list"><li style="list-style-type:disc"><strong>Model 3</strong> further refines errors</li></ul></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80c6-8e3c-ecb21af6f998" class="">Final decision = <strong>weighted vote of all models</strong></p></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8058-a292-d9e994709916"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-8095-a80d-c388f08929f8" class=""><strong>Important Characteristics of Boosting</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-80b6-9b81-e2b11b7d9619" class="numbered-list" start="1"><li><strong>Sequential Learning</strong><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8094-aa1e-c4129536827c" class="bulleted-list"><li style="list-style-type:disc">Each model depends on the previous one</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-80c7-9e26-dbe8dfe666c8" class="numbered-list" start="2"><li><strong>Weighted Samples</strong><div style="display:contents" dir="auto"><ul id="2de682cb-1765-802e-a406-eea9fc7971d0" class="bulleted-list"><li style="list-style-type:disc">Hard samples receive more importance</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-8079-a673-e66ac3e0672b" class="numbered-list" start="3"><li><strong>Weighted Voting</strong><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80d5-8f01-c41bf62a5ac2" class="bulleted-list"><li style="list-style-type:disc">Better models have higher influence</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-804a-892b-c0d6ef47a101" class="numbered-list" start="4"><li><strong>Bias Reduction</strong><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80ea-b616-e35af70097aa" class="bulleted-list"><li style="list-style-type:disc">Strongly reduces underfitting</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-801d-b1d1-de0a016aca3c" class="numbered-list" start="5"><li><strong>Sensitive to Noise</strong><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80ae-ac6e-dbf1b11eb5dd" class="bulleted-list"><li style="list-style-type:disc">Outliers may receive high weight</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-80a8-9aaf-d571197c530f"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-808a-9937-e7f7baa9abd8" class=""><strong>Advantages of Boosting</strong></h3></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-802c-b3ce-fc336035fa35" class="bulleted-list"><li style="list-style-type:disc">High prediction accuracy</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-808e-8b16-e4d92642ca12" class="bulleted-list"><li style="list-style-type:disc">Converts weak learners into strong learners</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8028-939e-d607b087687a" class="bulleted-list"><li style="list-style-type:disc">Reduces both <strong>bias and variance</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8076-a316-f6b21809f590" class="bulleted-list"><li style="list-style-type:disc">Works well with simple base learners (decision stumps)</li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-80ab-9ffc-ef6db5cfccee"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-807e-9abf-d9209c2ee23d" class=""><strong>Disadvantages of Boosting</strong></h3></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8091-8fda-c4715b5589c6" class="bulleted-list"><li style="list-style-type:disc">Sensitive to noise and outliers</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80c2-913b-e49f47c9f5aa" class="bulleted-list"><li style="list-style-type:disc">Sequential nature makes it slower</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8032-8e75-fee53ef9a04e" class="bulleted-list"><li style="list-style-type:disc">Risk of overfitting noisy datasets</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-804f-9f32-f4b2e37a61fb" class="bulleted-list"><li style="list-style-type:disc">Complex to tune hyperparameters</li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-80e5-b1da-dd0b50aee7ca"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-8067-8cd7-c086bc165f69" class=""><strong>Applications of Boosting</strong></h3></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8058-8675-cef538187ac9" class="bulleted-list"><li style="list-style-type:disc">Spam detection</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8044-8fe1-cc7cea8fc378" class="bulleted-list"><li style="list-style-type:disc">Face detection (Viola–Jones algorithm)</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8016-8a84-ec7027119919" class="bulleted-list"><li style="list-style-type:disc">Credit scoring</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8055-8dcd-f72f47f6d453" class="bulleted-list"><li style="list-style-type:disc">Medical diagnosis</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8018-b1d0-eb53c8d2d1f7" class="bulleted-list"><li style="list-style-type:disc">Recommendation systems</li></ul></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-8080-905e-eb7055bc1854" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-80a4-a71a-de9639692aff"/></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-80d6-a14a-d2d5fdf27749"/></div><div style="display:contents" dir="auto"><h2 id="2de682cb-1765-8014-a7d6-c20b090485b9" class=""><strong>AdaBoost (Adaptive Boosting) Algorithm</strong></h2></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-8077-92b7-df967237ce3f" class=""><strong>AdaBoost (Adaptive Boosting)</strong> is a popular <strong>ensemble learning algorithm</strong> that belongs to the <strong>Boosting family</strong>. It works by <strong>combining multiple weak learners sequentially</strong> to form a <strong>strong classifier</strong>. The key idea behind AdaBoost is to <strong>adaptively focus on training samples that are hard to classify</strong>, by assigning them <strong>higher weights</strong> in subsequent iterations.</p></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80a6-a472-d0dd2dd72e7f" class="">AdaBoost is most commonly used with <strong>decision stumps</strong> (one-level decision trees) as weak learners and is effective for both <strong>binary classification</strong> and <strong>multi-class classification</strong> (with extensions).</p></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80dc-b348-ec9e30e530cf" class="">For example:</p></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80f4-9a5b-f6740120f73c" class="bulleted-list"><li style="list-style-type:disc">In a face detection system, AdaBoost trains a sequence of weak classifiers, each correcting the mistakes of the previous one, resulting in a highly accurate final classifier.</li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-809a-95e6-cf13ca05fd54"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-801f-9700-f53cdeb18ca2" class=""><strong>Core Idea of AdaBoost</strong></h3></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8066-923c-f2249cd9dea0" class="bulleted-list"><li style="list-style-type:disc">Start with <strong>equal weights</strong> for all training samples</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-808e-8cca-ec758cc432b9" class="bulleted-list"><li style="list-style-type:disc">Train a weak learner</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8025-8b04-fb5ea5a6ef95" class="bulleted-list"><li style="list-style-type:disc">Increase weights of <strong>misclassified samples</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-805a-ad86-ebc359d233ea" class="bulleted-list"><li style="list-style-type:disc">Decrease weights of <strong>correctly classified samples</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80a1-abdc-fe49dd911cdf" class="bulleted-list"><li style="list-style-type:disc">Repeat this process iteratively</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80e2-997e-dfa082d38ef0" class="bulleted-list"><li style="list-style-type:disc">Combine all weak learners using <strong>weighted voting</strong></li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-809d-b301-f886dc63d65a"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80ce-b973-e25082ef57a1" class="">Conceptual Working</h3></div><div style="display:contents" dir="ltr"><figure id="2de682cb-1765-806b-a20c-c6ef8527a060" class="image"><a href="https://datamapu.com/images/adaboost/adaboost.png"><img src="https://datamapu.com/images/adaboost/adaboost.png"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-80dd-bca8-ed583271e133"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80e5-85eb-e726e6bb495c" class=""><strong>Why AdaBoost is Called “Adaptive”</strong></h3></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-801c-a1da-ca3156d19e11" class="bulleted-list"><li style="list-style-type:disc">The algorithm <strong>adapts</strong> to the data</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80a4-9f63-c0e95027c05d" class="bulleted-list"><li style="list-style-type:disc">Sample weights change after each iteration</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-803c-82a4-fe575b2d9752" class="bulleted-list"><li style="list-style-type:disc">Misclassified points receive <strong>more attention</strong> in future models</li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-805e-a5e6-d5e9afcf823d"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-804d-9339-f7cf60c38fdc" class=""><strong>Mathematical Notation</strong></h3></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-8081-97e1-d614557412fe" class="">Let:</p></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8070-8edd-f4c28acef0f9" class="bulleted-list"><li style="list-style-type:disc">Training data: <style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mi>n</mi></msub><mo separator="true">,</mo><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8084-8b2b-df6484bdcc39" class="bulleted-list"><li style="list-style-type:disc">Class labels:  <style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mi>i</mi></msub><mi>ϵ</mi><mo stretchy="false">{</mo><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mo>+</mo><mn>1</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">y_i \epsilon \{ -1,+1\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal">ϵ</span><span class="mopen">{</span><span class="mord">−</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">+</span><span class="mord">1</span><span class="mclose">}</span></span></span></span></span><span>﻿</span></span></li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80ec-81ef-c7384a7ce64a" class="bulleted-list"><li style="list-style-type:disc"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mi>t</mi></msub><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D_t(i)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span>: weight of sample <style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span></span></span></span></span><span>﻿</span></span> at iteration <style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span></span></span></span></span><span>﻿</span></span></li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8044-affd-d3309f246795" class="bulleted-list"><li style="list-style-type:disc"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>t</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">h_t(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span>: weak learner at iteration <style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span></span></span></span></span><span>﻿</span></span></li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-80d1-ae9b-c46174be1397"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80ca-8203-cdc59296cc88" class=""><strong>Algorithm Steps (AdaBoost Algorithm)</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80d6-a76c-f4b64fd933c2" class=""><strong>Step 1: Initialize Weights</strong></h3></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-8077-b7f6-ca4518c9b6bb" class="">Assign equal weight to all training samples:</p></div><div style="display:contents" dir="auto"><figure id="2de682cb-1765-80dd-acbc-e2847ae13245" class="equation"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>D</mi><mn>1</mn></msub><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><mo separator="true">,</mo><mspace width="1em"/><mi>i</mi><mo>=</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">D_1(i) = \frac{1}{n}, \quad i = 1, 2, \ldots, n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span></span></span></span></span></div></figure></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-80a1-9b60-cea319b5f96a"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80a8-a6a0-fb1fe99d5322" class=""><strong>Step 2: Train Weak Learner</strong></h3></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80f2-9db4-f5a2b5e74fa2" class="">Train a weak classifier <style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>t</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">h_t(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span> using the weighted training data.</p></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8064-adc0-c548ef4566d8"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-800e-ab17-e9bcbc5df6b3" class=""><strong>Step 3: Compute Weighted Error</strong></h3></div><div style="display:contents" dir="auto"><figure id="2de682cb-1765-80f5-a1b7-eeed89126488" class="equation"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>ϵ</mi><mi>t</mi></msub><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>D</mi><mi>t</mi></msub><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo><mtext> </mtext><mo stretchy="false">[</mo><msub><mi>y</mi><mi>i</mi></msub><mo mathvariant="normal">≠</mo><msub><mi>h</mi><mi>t</mi></msub><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\epsilon_t = \sum_{i=1}^{n} D_t(i)\,[y_i \neq h_t(x_i)]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">ϵ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.9291em;vertical-align:-1.2777em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel"><span class="mrel"><span class="mord vbox"><span class="thinbox"><span class="rlap"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="inner"><span class="mord"><span class="mrel"></span></span></span><span class="fix"></span></span></span></span></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)]</span></span></span></span></span></div></figure></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80a2-bf09-eb1b0afb1498" class="bulleted-list"><li style="list-style-type:disc"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ϵ</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\epsilon_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">ϵ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> measures how poorly the weak learner performs</li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-80a9-bb42-dccb5cc59df9"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80c3-bcc1-e836b9710e47" class=""><strong>Step 4: Compute Learner Weight</strong></h3></div><div style="display:contents" dir="auto"><figure id="2de682cb-1765-8020-b6f3-c14aed55b94f" class="equation"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>α</mi><mi>t</mi></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>ln</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msub><mi>ϵ</mi><mi>t</mi></msub></mrow><msub><mi>ϵ</mi><mi>t</mi></msub></mfrac><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\alpha_t = \frac{1}{2} \ln \left( \frac{1 - \epsilon_t}{\epsilon_t} \right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">ln</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">ϵ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal">ϵ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span></span></span></span></span></div></figure></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8078-a0a7-df49a4e047d7" class="bulleted-list"><li style="list-style-type:disc">Higher accuracy ⇒ larger <style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\alpha_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span></li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-80d6-82c3-e8335c51cc01"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-8030-b082-e8e00b63e00d" class=""><strong>Step 5: Update Sample Weights</strong></h3></div><div style="display:contents" dir="auto"><figure id="2de682cb-1765-8002-90b5-c2f27caa1934" class="equation"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>D</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><msub><mi>D</mi><mi>t</mi></msub><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo><mtext> </mtext><msup><mi>e</mi><mrow><mo>−</mo><msub><mi>α</mi><mi>t</mi></msub><msub><mi>y</mi><mi>i</mi></msub><msub><mi>h</mi><mi>t</mi></msub><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></msup></mrow><msub><mi>Z</mi><mi>t</mi></msub></mfrac></mrow><annotation encoding="application/x-tex">D_{t+1}(i) = \frac{D_t(i)\, e^{-\alpha_t y_i h_t(x_i)}}{Z_t}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.401em;vertical-align:-0.836em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.565em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2963em;"><span style="top:-2.357em;margin-left:-0.0037em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3281em;"><span style="top:-2.357em;margin-left:-0.0359em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mord mtight"><span class="mord mathnormal mtight">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2963em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mopen mtight">(</span><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3281em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></div></figure></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80f1-80d6-ead3b95cfead" class="">Where:</p></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80e8-85f1-ec682f9d4cb8" class="bulleted-list"><li style="list-style-type:disc"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Z</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">Z_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>  is a normalization constant</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80a2-a712-cd43499cecd9" class="bulleted-list"><li style="list-style-type:disc">Misclassified samples → weight increases</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80c6-9590-f8c39a82a07b" class="bulleted-list"><li style="list-style-type:disc">Correctly classified samples → weight decreases</li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8002-992a-ec6c9432df03"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-8032-b6f0-ca7362833e30" class=""><strong>Step 6: Repeat</strong></h3></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-802e-a735-c2b3fb4ee6b8" class="">Repeat Steps 2–5 for <style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span></span></span><span>﻿</span></span> iterations.</p></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8078-a6c9-ecf16ddd5d58"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-804c-b4e1-c0905b1ec532" class=""><strong>Step 7: Final Strong Classifier</strong></h3></div><div style="display:contents" dir="auto"><figure id="2de682cb-1765-80e0-bd7a-e830bb584a0f" class="equation"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>H</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mtext>sign</mtext><mrow><mo fence="true">(</mo><munderover><mo>∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mi>T</mi></munderover><msub><mi>α</mi><mi>t</mi></msub><msub><mi>h</mi><mi>t</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">H(x) = \text{sign}\left( \sum_{t=1}^{T} \alpha_t h_t(x) \right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:3.0954em;vertical-align:-1.2671em;"></span><span class="mord text"><span class="mord">sign</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">(</span></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283em;"><span style="top:-1.8829em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2671em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size4">)</span></span></span></span></span></span></span></div></figure></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8034-8d34-e38ac7d2d15b"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80e3-b484-f1ca7b9961ec" class=""><strong>Worked Example (Easy to Remember – Exam Friendly)</strong></h3></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-8062-82d6-ee330643d78c" class="">Suppose we want to classify emails as <strong>Spam (+1)</strong> or <strong>Not Spam (-1)</strong>.</p></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8000-a9f3-eae40162f2e7" class="bulleted-list"><li style="list-style-type:disc"><strong>Iteration 1:</strong><div style="display:contents" dir="auto"><p id="2de682cb-1765-8046-84b0-c535ed1d832c" class="">Weak learner misclassifies emails with unusual words</p></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-8006-ad38-c7dbcd1695fc" class="">→ Increase weights of those emails</p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8044-b26a-fbf178b89b1c" class="bulleted-list"><li style="list-style-type:disc"><strong>Iteration 2:</strong><div style="display:contents" dir="auto"><p id="2de682cb-1765-804e-b76c-eb983825bb16" class="">New learner focuses more on those difficult emails</p></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-802c-9c1b-cd2603c29ee1" class="">→ Fewer mistakes</p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80b2-8def-dc75f810fa21" class="bulleted-list"><li style="list-style-type:disc"><strong>Iteration 3:</strong><div style="display:contents" dir="auto"><p id="2de682cb-1765-805e-a0fc-ffdd5403c244" class="">Errors reduce further</p></div></li></ul></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-8093-8df4-fbb247622efe" class="">Final prediction = <strong>weighted vote of all weak learners</strong></p></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-802e-a10a-d0d0c36d0763"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80d3-b749-c280d49dca3a" class=""><strong>Assumptions of AdaBoost</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-8054-a312-f49f1b43f244" class="numbered-list" start="1"><li>Weak learners perform <strong>slightly better than random guessing</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-8011-8e9e-eaf87a8b3ce0" class="numbered-list" start="2"><li>Data is <strong>reasonably clean</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2de682cb-1765-805f-a78c-c2e21ee1a810" class="numbered-list" start="3"><li>Weak learners can handle weighted samples</li></ol></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8002-8e97-ecd4ff6cf452"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-807f-a442-f95f43247521" class=""><strong>Advantages of AdaBoost</strong></h3></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80ca-bdbb-fa5d1eb475c9" class="bulleted-list"><li style="list-style-type:disc">High classification accuracy</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8087-903d-e7228162629b" class="bulleted-list"><li style="list-style-type:disc">Automatically focuses on hard examples</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80e6-81df-c88a8b19535f" class="bulleted-list"><li style="list-style-type:disc">Simple and elegant algorithm</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-805b-8290-cc84ec57076f" class="bulleted-list"><li style="list-style-type:disc">Strong theoretical guarantees</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-809b-9588-fd7cbe9005e1" class="bulleted-list"><li style="list-style-type:disc">Less prone to overfitting on clean data</li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-80ad-b23f-f6b1409736f7"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-8076-9e2a-ebcc24daf9c3" class=""><strong>Disadvantages of AdaBoost</strong></h3></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8099-bfdc-ca7a845ba6f7" class="bulleted-list"><li style="list-style-type:disc">Very sensitive to noise and outliers</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80be-bb9b-f80852bd312d" class="bulleted-list"><li style="list-style-type:disc">Misclassified noisy points get excessive weight</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8044-ab4c-deeeb5d6e80f" class="bulleted-list"><li style="list-style-type:disc">Sequential nature makes training slower</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80a8-82e9-c62ec4bcbdc3" class="bulleted-list"><li style="list-style-type:disc">Performance degrades with highly overlapping classes</li></ul></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-80b9-bb51-d9484eb9d245"/></div><div style="display:contents" dir="auto"><h3 id="2de682cb-1765-80be-9932-c221afafff8a" class=""><strong>Applications of AdaBoost</strong></h3></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80c3-900e-cbfaa0a2359b" class="bulleted-list"><li style="list-style-type:disc">Face detection (Viola–Jones framework)</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-8040-bcb1-e6a73c3da72b" class="bulleted-list"><li style="list-style-type:disc">Text classification</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-806f-aa9c-e902c891a9a2" class="bulleted-list"><li style="list-style-type:disc">Medical diagnosis</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-808c-b678-d3571fcc4753" class="bulleted-list"><li style="list-style-type:disc">Fraud detection</li></ul></div><div style="display:contents" dir="auto"><ul id="2de682cb-1765-80b7-879a-c3d07273dde6" class="bulleted-list"><li style="list-style-type:disc">Object recognition</li></ul></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-8063-8039-e5b31756fd0c" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-806a-b2c6-cb0c51efd4e5"/></div><div style="display:contents" dir="auto"><hr id="2de682cb-1765-8085-a2b1-ec001b9f3719"/></div><div style="display:contents" dir="auto"><p id="2de682cb-1765-80a5-89eb-d1797df1c842" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

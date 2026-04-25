@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vinay Sukase - Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #fafaf8;
+    --surface: rgba(255, 255, 255, 0.88);
+    --text-primary: #111111;
+    --text-secondary: #666666;
+    --text-faint: #8b8b8b;
+    --line-soft: rgba(17, 17, 17, 0.08);
+    --line-faint: rgba(17, 17, 17, 0.05);
+    --shadow-soft: 0 20px 60px rgba(17, 17, 17, 0.06);
+    --radius-lg: 2rem;
+    --radius-md: 1.25rem;
+    --radius-sm: 999px;
+    --max-width: 76rem;
+    --font-ui: "Inter", sans-serif;
+    --font-accent: "Playfair Display", serif;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-ui);
+    color: var(--text-primary);
+    background:
+      radial-gradient(circle at top left, rgba(0, 0, 0, 0.02), transparent 24%),
+      linear-gradient(180deg, #ffffff 0%, #fcfcfb 100%);
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  strong {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  p,
+  li {
+    max-width: 68ch;
+  }
+
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+
+  .shell {
+    width: min(100% - 2.5rem, var(--max-width));
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    margin: 0 0 1rem;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .heading-xl {
+    margin: 0;
+    font-family: var(--font-accent);
+    font-size: clamp(3rem, 6vw, 4rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+
+  .heading-lg {
+    margin: 0;
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    line-height: 1.22;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+  }
+
+  .heading-accent {
+    font-family: var(--font-accent);
+    font-weight: 600;
+  }
+
+  .subheading {
+    margin: 0;
+    font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    font-weight: 400;
+    color: var(--text-secondary);
+  }
+
+  .body-lg {
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .body-md {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .meta {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--text-faint);
+  }
+
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(14px);
+    background: rgba(255, 255, 255, 0.82);
+    border-bottom: 1px solid var(--line-faint);
+  }
+
+  .site-nav-inner {
+    width: min(100% - 2.5rem, var(--max-width));
+    margin: 0 auto;
+    min-height: 4.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .brand {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .nav-links a {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus-visible {
+    color: var(--text-primary);
+  }
+
+  .nav-contact {
+    min-height: 2.25rem;
+    padding: 0 0.9rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line-soft);
+    color: var(--text-primary) !important;
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  .hero {
+    padding: 6rem 0 5rem;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 24rem);
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .hero-copy .body-lg {
+    max-width: 36rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    padding-top: 0.5rem;
+  }
+
+  .button-primary,
+  .button-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0 1.2rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .button-primary {
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .button-secondary {
+    border: 1px solid var(--line-soft);
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .button-primary:hover,
+  .button-secondary:hover {
+    transform: translateY(-1px);
+  }
+
+  .hero-card {
+    justify-self: end;
+    width: min(100%, 23rem);
+  }
+
+  .profile-frame {
+    overflow: hidden;
+    border-radius: 2rem;
+    background: linear-gradient(180deg, #f5f5f2 0%, #ecebe6 100%);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .profile-frame img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .identity-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+
+  .identity-tags span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0 0.85rem;
+    border-radius: var(--radius-sm);
+    background: rgba(17, 17, 17, 0.04);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .section {
+    padding: 4.5rem 0;
+  }
+
+  .section-intro {
+    display: grid;
+    gap: 0.9rem;
+    margin-bottom: 2.25rem;
+  }
+
+  .about-copy {
+    display: grid;
+    gap: 1.2rem;
+  }
+
+  .projects-list,
+  .notes-list,
+  .certificate-list {
+    display: grid;
+    gap: 1.4rem;
+  }
+
+  .project-card,
+  .note-card,
+  .certificate-card,
+  .teaching-card,
+  .contact-card {
+    padding: 1.75rem;
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    box-shadow: 0 1px 0 var(--line-faint);
+  }
+
+  .project-card,
+  .note-card {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    padding-top: 0.2rem;
+  }
+
+  .project-title,
+  .note-title {
+    margin: 0;
+    font-size: clamp(1.75rem, 2vw, 2rem);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+  }
+
+  .note-title.heading-accent {
+    font-size: clamp(1.55rem, 2vw, 1.9rem);
+  }
+
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    font-size: 0.875rem;
+    color: var(--text-faint);
+  }
+
+  .teaching-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.2rem;
+  }
+
+  .teaching-card {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .teaching-card h3,
+  .contact-card h3,
+  .certificate-card h3 {
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+  }
+
+  .teaching-card ul {
+    margin: 0;
+    padding-left: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .certificate-card {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .certificate-label {
+    margin: 0 0 0.55rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+  }
+
+  .contact-card {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .contact-card a {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .footer {
+    padding: 2.5rem 0 3rem;
+    color: var(--text-faint);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 1px solid var(--line-faint);
+    padding-top: 1.5rem;
+  }
+
+  @media (max-width: 64rem) {
+    .hero-grid,
+    .teaching-grid,
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-card {
+      justify-self: start;
+    }
+  }
+
+  @media (max-width: 42rem) {
+    .shell,
+    .site-nav-inner {
+      width: min(100% - 1.5rem, var(--max-width));
+    }
+
+    .site-nav-inner {
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 0.9rem 0;
+    }
+
+    .hero {
+      padding: 4.5rem 0 3.5rem;
+    }
+
+    .section {
+      padding: 3.25rem 0;
+    }
+
+    .project-card,
+    .note-card,
+    .certificate-card,
+    .teaching-card,
+    .contact-card {
+      padding: 1.35rem;
+    }
+
+    .certificate-card {
+      flex-direction: column;
+    }
+  }
+</style>
+</head>
+<body>
+  <header class="site-nav">
+    <div class="site-nav-inner">
+      <a href="#home" class="brand">Vinay Sukase</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="notes.html">Notes</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#certificates">Certificates</a>
+        <a href="#contact" class="nav-contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero shell" id="home">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Researcher · AI/ML Engineer · Educator</p>
+          <h1 class="heading-xl">Vinay Sukase</h1>
+          <p class="subheading">Building thoughtful digital systems and clear study material for the next generation of engineers.</p>
+          <p class="body-lg">
+            I work across <strong>applied AI</strong>, <strong>full-stack product development</strong>, and
+            <strong>teaching-focused knowledge design</strong>, with a calm approach to building things that are useful,
+            readable, and meant to last.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="button-primary">Selected Work</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="profile-frame">
+            <img src="profile_photo.jpg" alt="Portrait of Vinay Sukase" />
+          </div>
+          <div class="identity-tags" aria-label="Identity tags">
+            <span>MTech CSE</span>
+            <span>Government College of Engineering</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="about">
+      <div class="section-intro">
+        <p class="eyebrow">About Me</p>
+        <h2 class="heading-lg">A practice shaped by clarity, systems thinking, and teaching.</h2>
+      </div>
+      <div class="about-copy">
+        <p class="body-lg">
+          I am a postgraduate Computer Science student with a background in Information Technology and hands-on experience in
+          <strong>web development</strong>, <strong>AI-oriented problem solving</strong>, and real product work.
+        </p>
+        <p class="body-lg">
+          My work has included building dashboards, customer-facing platforms, and digital systems for startups while staying focused on
+          <strong>usability</strong>, <strong>structure</strong>, and calm execution.
+        </p>
+        <p class="body-lg">
+          Alongside engineering, I curate and share student-friendly notes across machine learning, IoT, computer vision, and data science,
+          because I care deeply about making technical ideas more approachable and well organized.
+        </p>
+      </div>
+    </section>
+
+    <section class="section shell" id="projects">
+      <div class="section-intro">
+        <p class="eyebrow">Projects</p>
+        <h2 class="heading-lg">Selected product and engineering work.</h2>
+      </div>
+      <div class="projects-list">
+        <article class="project-card">
+          <h3 class="project-title">Cognitive Load Assistant</h3>
+          <p class="body-md">
+            A live frontend project for a cognitive load assistant experience, designed as an interactive web interface for guided cognitive workflows and user-facing assessment flows.
+          </p>
+          <div class="card-meta">
+            <span>Frontend Web App</span>
+            <span>Live Project</span>
+            <span>OnRender Deployment</span>
+            <span>2026</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://cognitive-load-frontend.onrender.com/" target="_blank" rel="noreferrer" class="button-secondary">Visit Project</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <h3 class="project-title">ElectroMech Business Management Dashboard</h3>
+          <p class="body-md">
+            Built a real-time business dashboard for operational oversight across orders, sales, and reporting, with a focus on clear data presentation and decision support.
+          </p>
+          <div class="card-meta">
+            <span>React.js</span>
+            <span>Data Visualization</span>
+            <span>MagicFlare Software Solutions</span>
+            <span>2024 - 2025</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <h3 class="project-title">Food Delivery Platform and Admin Panel</h3>
+          <p class="body-md">
+            Developed a customer-facing food ordering experience and a parallel admin workflow for handling live orders, operations, and daily management.
+          </p>
+          <div class="card-meta">
+            <span>React.js</span>
+            <span>JavaScript</span>
+            <span>Scalefull Technologies</span>
+            <span>2024</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <h3 class="project-title">Healthy Crumbs E-Commerce Store</h3>
+          <p class="body-md">
+            Designed and launched the online presence for a health food startup, from interface direction through deployment of a functioning commerce experience.
+          </p>
+          <div class="card-meta">
+            <span>HTML / CSS / JavaScript</span>
+            <span>E-Commerce</span>
+            <span>Freelance</span>
+            <span><a href="https://www.healthycrumbs.in" target="_blank" rel="noreferrer">healthycrumbs.in</a></span>
+          </div>
+          <div class="project-actions">
+            <a href="https://www.healthycrumbs.in" target="_blank" rel="noreferrer" class="button-secondary">Visit Project</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" id="notes">
+      <div class="section-intro">
+        <p class="eyebrow">Subject Notes</p>
+        <h2 class="heading-lg heading-accent">A growing collection of subject notes written and organized by me for students.</h2>
+      </div>
+      <div class="notes-list">
+        <article class="note-card">
+          <h3 class="note-title heading-accent">Machine Learning, Python, Computer Vision, IoT, and more.</h3>
+          <p class="body-md">
+            These are subject notes I write to make technical topics easier to study, revise, and teach. Students can choose a subject, see the available topic folders on the left, and read the exported HTML note directly on the right without leaving the notes page.
+          </p>
+          <div class="card-meta">
+            <span>Written by me</span>
+            <span>Subject-wise organization</span>
+            <span>Clutter-free reading</span>
+          </div>
+          <div>
+            <a href="notes.html" class="button-secondary">Open Subject Notes</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" id="teaching">
+      <div class="section-intro">
+        <p class="eyebrow">Teaching</p>
+        <h2 class="heading-lg">Subjects I teach with a practical and structured approach.</h2>
+      </div>
+      <div class="teaching-grid">
+        <article class="teaching-card">
+          <h3>Machine Learning and Artificial Intelligence</h3>
+          <ul>
+            <li>Foundations, model intuition, and applied workflows</li>
+            <li>Regression, classification, trees, and neural networks</li>
+            <li>Readable explanations supported by notes and examples</li>
+          </ul>
+        </article>
+
+        <article class="teaching-card">
+          <h3>Python Programming and Data Structures</h3>
+          <ul>
+            <li>Beginner-friendly programming foundations</li>
+            <li>Functions, OOP, problem solving, and interview basics</li>
+            <li>Concept clarity before complexity</li>
+          </ul>
+        </article>
+
+        <article class="teaching-card">
+          <h3>IoT, Data Science, and Big Data</h3>
+          <ul>
+            <li>Architecture, pipelines, and real-world system thinking</li>
+            <li>Bridging software, data, and connected devices</li>
+            <li>Organized study material for progressive learning</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" id="certificates">
+      <div class="section-intro">
+        <p class="eyebrow">Certificates</p>
+        <h2 class="heading-lg">Selected certifications and training.</h2>
+      </div>
+      <div class="certificate-list">
+        <article class="certificate-card">
+          <div>
+            <p class="certificate-label">Coursera</p>
+            <h3>Programming for Everybody (Getting Started with Python)</h3>
+            <p class="meta">University of Michigan</p>
+          </div>
+          <a class="meta" href="https://drive.google.com/file/d/1lSRG6iAa0Sdz4OOdXrthXOMEwTI_uUUM/view?usp=drive_link" target="_blank" rel="noreferrer">View certificate</a>
+        </article>
+
+        <article class="certificate-card">
+          <div>
+            <p class="certificate-label">Coursera</p>
+            <h3>Python Data Structures</h3>
+            <p class="meta">University of Michigan</p>
+          </div>
+          <a class="meta" href="https://drive.google.com/file/d/1ij6uudeaw07UETO4Q4wyrbFQ4KMOmmHc/view?usp=drive_link" target="_blank" rel="noreferrer">View certificate</a>
+        </article>
+
+        <article class="certificate-card">
+          <div>
+            <p class="certificate-label">Coursera</p>
+            <h3>Hands-on Introduction to Linux Commands and Shell Scripting</h3>
+            <p class="meta">IBM</p>
+          </div>
+          <a class="meta" href="https://drive.google.com/file/d/1qRZY2viCv3NY6Q2os3o26d-CgSGFvmAl/view?usp=drive_link" target="_blank" rel="noreferrer">View certificate</a>
+        </article>
+
+        <article class="certificate-card">
+          <div>
+            <p class="certificate-label">Workshop</p>
+            <h3>Applied AI Workshop</h3>
+            <p class="meta">Applied certification</p>
+          </div>
+          <a class="meta" href="https://drive.google.com/file/d/1l3vdCEiW3K3dbwEulWQcHkWnp-iVlw6M/view?usp=drive_link" target="_blank" rel="noreferrer">View certificate</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" id="contact">
+      <div class="section-intro">
+        <p class="eyebrow">Contact</p>
+        <h2 class="heading-lg">Open to collaborations, student questions, and meaningful product work.</h2>
+      </div>
+      <div class="contact-grid">
+        <article class="contact-card">
+          <h3>Email</h3>
+          <p class="body-md">The best place for project discussions, research conversations, and student queries.</p>
+          <a href="mailto:vinaysukasework@gmail.com">vinaysukasework@gmail.com</a>
+        </article>
+
+        <article class="contact-card">
+          <h3>GitHub</h3>
+          <p class="body-md">Code, experiments, and technical exploration.</p>
+          <a href="https://github.com/Vinay-Sukase" target="_blank" rel="noreferrer">github.com/Vinay-Sukase</a>
+        </article>
+
+        <article class="contact-card">
+          <h3>LinkedIn</h3>
+          <p class="body-md">Professional updates, collaborations, and network connections.</p>
+          <a href="https://www.linkedin.com/in/vinay-sukase/" target="_blank" rel="noreferrer">linkedin.com/in/vinay-sukase</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <div class="meta">Vinay Sukase</div>
+      <div class="meta">Researcher · AI/ML Engineer · Educator</div>
+    </div>
+  </footer>
+</body>
+</html>

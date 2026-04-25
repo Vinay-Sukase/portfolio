@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vinay Sukase - Subject Notes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/notes.css" />
+  </head>
+  <body>
+    <nav class="notes-nav">
+      <a href="index.html#home" class="nav-logo">vinay<span>.</span>sukase</a>
+      <div class="nav-links">
+        <a href="index.html#about">About</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="notes.html" class="active">Subject Notes</a>
+        <a href="index.html#contact" class="nav-cta">Contact</a>
+      </div>
+    </nav>
+
+    <header class="notes-hero notes-hero-simple">
+      <div class="hero-copy">
+        <p class="hero-eyebrow">Subject Notes</p>
+        <h1>Notes I have written to help students study with more clarity.</h1>
+        <p>
+          This library brings together subject-wise notes that I write for
+          revision, teaching, and concept building. Choose a subject first, then
+          read the exported HTML notes directly inside the page in a clean,
+          focused layout.
+        </p>
+      </div>
+    </header>
+
+    <main class="notes-page">
+      <section id="subjectsView" class="subjects-view">
+        <div class="section-intro">
+          <p class="section-eyebrow">Browse By Subject</p>
+          <h2>Choose a subject to open its notes.</h2>
+        </div>
+        <div id="subjectsGrid" class="topics-grid"></div>
+      </section>
+
+      <section id="readerView" class="reader-view is-hidden">
+        <div class="reader-topbar">
+          <div>
+            <a href="notes.html" class="back-link">Back to all subjects</a>
+            <p id="subjectEyebrow" class="section-eyebrow">Subject Notes</p>
+            <h2 id="subjectTitle" class="reader-view-title">Subject</h2>
+            <p id="subjectDescription" class="topic-description">
+              Choose a note from the list to start reading.
+            </p>
+          </div>
+        </div>
+
+        <div class="topic-layout">
+          <aside class="topic-sidebar">
+            <div class="topic-sidebar-card">
+              <p class="section-eyebrow">Available Topics</p>
+              <div id="topicNoteList" class="topic-note-list"></div>
+            </div>
+          </aside>
+
+          <article class="topic-reader">
+            <div class="reader-header">
+              <div>
+                <p id="readerTopic" class="section-eyebrow">Note</p>
+                <h3 id="readerTitle">Select a note</h3>
+                <p id="readerMeta" class="reader-meta">
+                  Choose a note from the left side to read it here.
+                </p>
+              </div>
+              <a
+                id="readerSource"
+                class="reader-source disabled"
+                href="#"
+                aria-disabled="true"
+                >Open Note File</a
+              >
+            </div>
+            <div id="readerBody" class="reader-body empty-state">
+              <p>
+                This panel shows the selected HTML note directly inside the
+                subject notes page.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="assets/js/notes-data.js"></script>
+    <script src="assets/js/notes-home.js"></script>
+  </body>
+</html>

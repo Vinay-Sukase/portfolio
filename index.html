@@ -159,6 +159,61 @@
     letter-spacing: -0.01em;
   }
 
+  .nav-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--text-primary);
+    cursor: pointer;
+  }
+
+  .nav-toggle-lines,
+  .nav-toggle-lines::before,
+  .nav-toggle-lines::after {
+    display: block;
+    width: 1rem;
+    height: 1px;
+    background: currentColor;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .nav-toggle-lines {
+    position: relative;
+  }
+
+  .nav-toggle-lines::before,
+  .nav-toggle-lines::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .nav-toggle-lines::before {
+    transform: translateY(-0.35rem);
+  }
+
+  .nav-toggle-lines::after {
+    transform: translateY(0.35rem);
+  }
+
+  .site-nav.is-open .nav-toggle-lines {
+    background: transparent;
+  }
+
+  .site-nav.is-open .nav-toggle-lines::before {
+    transform: rotate(45deg);
+  }
+
+  .site-nav.is-open .nav-toggle-lines::after {
+    transform: rotate(-45deg);
+  }
+
   .nav-links {
     display: flex;
     flex-wrap: wrap;
@@ -445,13 +500,74 @@
     }
 
     .site-nav-inner {
-      align-items: flex-start;
-      flex-direction: column;
-      padding: 0.9rem 0;
+      align-items: center;
+      min-height: auto;
+      padding: 0.75rem 0;
+      gap: 0.8rem;
+    }
+
+    .brand {
+      font-size: 0.9rem;
+    }
+
+    .nav-toggle {
+      display: inline-flex;
+      margin-left: auto;
+    }
+
+    .nav-links {
+      display: none;
+      width: 100%;
+      flex-basis: 100%;
+      gap: 0.55rem;
+      padding: 0.15rem 0 0.2rem;
+    }
+
+    .site-nav.is-open .nav-links {
+      display: flex;
+    }
+
+    .nav-links a {
+      min-height: 2.25rem;
+      padding: 0 0.7rem;
+      border-radius: var(--radius-sm);
+      background: rgba(17, 17, 17, 0.035);
+      font-size: 0.82rem;
+    }
+
+    .nav-contact {
+      min-height: 2.25rem;
+      padding: 0 0.85rem;
     }
 
     .hero {
-      padding: 4.5rem 0 3.5rem;
+      padding: 3.5rem 0 3rem;
+    }
+
+    .hero-grid {
+      gap: 2rem;
+    }
+
+    .hero-card {
+      width: min(100%, 19rem);
+    }
+
+    .heading-xl {
+      font-size: clamp(2.45rem, 13vw, 3.2rem);
+      letter-spacing: 0;
+    }
+
+    .heading-lg {
+      font-size: clamp(1.55rem, 8vw, 2rem);
+      letter-spacing: 0;
+    }
+
+    .subheading {
+      font-size: 1.12rem;
+    }
+
+    .body-lg {
+      font-size: 1.02rem;
     }
 
     .section {
@@ -466,8 +582,91 @@
       padding: 1.35rem;
     }
 
+    .project-title,
+    .note-title {
+      font-size: clamp(1.4rem, 8vw, 1.75rem);
+      letter-spacing: 0;
+    }
+
     .certificate-card {
       flex-direction: column;
+    }
+
+    .contact-card a,
+    .identity-tags span,
+    .card-meta span {
+      overflow-wrap: anywhere;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .shell,
+    .site-nav-inner {
+      width: min(100% - 1rem, var(--max-width));
+    }
+
+    .nav-links {
+      display: none;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.45rem;
+    }
+
+    .site-nav.is-open .nav-links {
+      display: grid;
+    }
+
+    .nav-links a {
+      justify-content: center;
+      padding: 0 0.55rem;
+      text-align: center;
+    }
+
+    .hero {
+      padding: 3rem 0 2.7rem;
+    }
+
+    .hero-actions,
+    .project-actions {
+      width: 100%;
+    }
+
+    .button-primary,
+    .button-secondary {
+      width: 100%;
+      min-height: 3.1rem;
+      padding: 0 1rem;
+      text-align: center;
+    }
+
+    .hero-card {
+      width: min(100%, 17rem);
+    }
+
+    .profile-frame {
+      border-radius: 1.35rem;
+    }
+
+    .identity-tags {
+      gap: 0.45rem;
+    }
+
+    .identity-tags span {
+      min-height: 1.9rem;
+      padding: 0 0.7rem;
+      font-size: 0.8rem;
+    }
+
+    .section {
+      padding: 2.75rem 0;
+    }
+
+    .project-card,
+    .note-card,
+    .certificate-card,
+    .teaching-card,
+    .contact-card {
+      padding: 1.1rem;
+      border-radius: 1rem;
     }
   }
 </style>
@@ -476,7 +675,10 @@
   <header class="site-nav">
     <div class="site-nav-inner">
       <a href="#home" class="brand">Vinay Sukase</a>
-      <nav class="nav-links" aria-label="Primary">
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-nav">
+        <span class="nav-toggle-lines" aria-hidden="true"></span>
+      </button>
+      <nav class="nav-links" id="primary-nav" aria-label="Primary">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="notes.html">Notes</a>
@@ -738,5 +940,22 @@
       <div class="meta">Researcher · AI/ML Engineer · Educator</div>
     </div>
   </footer>
+  <script>
+    const siteNav = document.querySelector(".site-nav");
+    const navToggle = document.querySelector(".nav-toggle");
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    navToggle?.addEventListener("click", () => {
+      const isOpen = siteNav.classList.toggle("is-open");
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        siteNav.classList.remove("is-open");
+        navToggle?.setAttribute("aria-expanded", "false");
+      });
+    });
+  </script>
 </body>
 </html>

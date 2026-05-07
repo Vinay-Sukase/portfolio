@@ -48,14 +48,19 @@ strong {
   position: sticky;
   top: 0;
   z-index: 20;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line-faint);
+}
+
+.notes-nav-inner {
+  width: min(100% - 2.5rem, 76rem);
+  margin: 0 auto;
+  min-height: 4.75rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1rem clamp(1.25rem, 4vw, 3rem);
-  background: rgba(255, 255, 255, 0.84);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--line-faint);
 }
 
 .nav-logo {
@@ -64,15 +69,66 @@ strong {
   letter-spacing: -0.01em;
 }
 
-.nav-logo span {
-  color: var(--text-secondary);
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.nav-toggle-lines,
+.nav-toggle-lines::before,
+.nav-toggle-lines::after {
+  display: block;
+  width: 1rem;
+  height: 1px;
+  background: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-toggle-lines {
+  position: relative;
+}
+
+.nav-toggle-lines::before,
+.nav-toggle-lines::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.nav-toggle-lines::before {
+  transform: translateY(-0.35rem);
+}
+
+.nav-toggle-lines::after {
+  transform: translateY(0.35rem);
+}
+
+.notes-nav.is-open .nav-toggle-lines {
+  background: transparent;
+}
+
+.notes-nav.is-open .nav-toggle-lines::before {
+  transform: rotate(45deg);
+}
+
+.notes-nav.is-open .nav-toggle-lines::after {
+  transform: rotate(-45deg);
 }
 
 .nav-links {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1.1rem;
+  gap: 1.2rem;
 }
 
 .nav-links a {
@@ -80,6 +136,7 @@ strong {
   align-items: center;
   font-size: 0.875rem;
   color: var(--text-secondary);
+  transition: color 0.2s ease;
 }
 
 .nav-links a.active,
@@ -234,6 +291,7 @@ strong {
   grid-template-columns: 18rem minmax(0, 1fr);
   gap: 1.25rem;
   align-items: start;
+  min-width: 0;
 }
 
 .topic-sidebar {
@@ -246,6 +304,7 @@ strong {
   background: var(--surface);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
+  min-width: 0;
 }
 
 .topic-sidebar-card {
@@ -289,6 +348,7 @@ strong {
 
 .topic-reader {
   padding: 1.4rem;
+  overflow-x: auto;
 }
 
 .reader-header {
@@ -336,6 +396,8 @@ strong {
   margin-top: 1.15rem;
   padding-top: 1.15rem;
   border-top: 1px solid var(--line-faint);
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .reader-body.empty-state {
@@ -425,16 +487,29 @@ strong {
 }
 
 .reader-body img {
+  width: auto;
+  height: auto;
   max-width: 100%;
   border-radius: 1rem;
 }
 
 .notion-import {
   color: var(--text-primary);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .notion-import > :first-child {
   margin-top: 0;
+}
+
+.notion-import .page,
+.notion-import .page-body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .notion-import h1,
@@ -477,9 +552,12 @@ strong {
 .notion-import ol,
 .notion-import blockquote,
 .notion-import figure,
-.notion-import table {
+.notion-import table,
+.notion-import .simple-table,
+.notion-import .equation-container,
+.notion-import .katex-display {
   margin: 0 0 1rem;
-  max-width: 72ch;
+  max-width: min(100%, 72ch);
 }
 
 .notion-import ul,
@@ -509,6 +587,8 @@ strong {
 .notion-import figure.image img,
 .notion-import img {
   display: block;
+  width: auto;
+  height: auto;
   max-width: 100%;
   border-radius: 1rem;
 }
@@ -524,7 +604,8 @@ strong {
   border-top: 1px solid var(--line-faint);
 }
 
-.notion-import table {
+.notion-import table,
+.notion-import .simple-table {
   width: 100%;
   border-collapse: collapse;
   overflow-x: auto;
@@ -544,6 +625,22 @@ strong {
   border-radius: 1rem;
   background: #f7f7f5;
   overflow-x: auto;
+}
+
+.notion-import .equation,
+.notion-import .equation-container,
+.notion-import .katex-display {
+  max-width: 100%;
+}
+
+.notion-import .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.25rem;
+}
+
+.notion-import .katex {
+  max-width: 100%;
 }
 
 .empty-message {
@@ -571,9 +668,45 @@ strong {
 }
 
 @media (max-width: 42rem) {
-  .notes-nav {
-    align-items: flex-start;
-    flex-direction: column;
+  .notes-nav-inner {
+    width: min(100% - 1.5rem, 76rem);
+    align-items: center;
+    min-height: auto;
+    padding: 0.75rem 0;
+    gap: 0.8rem;
+  }
+
+  .nav-logo {
+    font-size: 0.9rem;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-basis: 100%;
+    gap: 0.55rem;
+  }
+
+  .notes-nav.is-open .nav-links {
+    display: flex;
+  }
+
+  .nav-links a {
+    min-height: 2.25rem;
+    padding: 0 0.7rem;
+    border-radius: var(--radius-sm);
+    background: rgba(17, 17, 17, 0.035);
+    font-size: 0.82rem;
+  }
+
+  .nav-cta {
+    min-height: 2.25rem;
+    padding: 0 0.85rem;
   }
 
   .notes-hero,
@@ -582,12 +715,147 @@ strong {
   }
 
   .notes-hero-simple {
-    padding: 4rem 0 2.2rem;
+    padding: 3.4rem 0 2.1rem;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.25rem, 12vw, 3.1rem);
+    letter-spacing: 0;
+  }
+
+  .hero-copy p:last-child,
+  .topic-description {
+    font-size: 1.02rem;
+  }
+
+  .section-intro h2,
+  .reader-view-title {
+    font-size: clamp(1.5rem, 8vw, 2rem);
+    letter-spacing: 0;
+  }
+
+  .topic-card,
+  .topic-reader {
+    border-radius: 1rem;
+  }
+
+  .topic-card {
+    padding: 1.1rem;
+  }
+
+  .topic-sidebar-card {
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  .topic-reader {
+    padding: 1.1rem;
   }
 
   .reader-header,
   .topic-card-top {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .reader-header h3 {
+    font-size: clamp(1.35rem, 7vw, 1.75rem);
+    letter-spacing: 0;
+  }
+
+  .reader-source {
+    width: 100%;
+    min-height: 2.9rem;
+  }
+
+  .topic-note-button {
+    min-height: 3rem;
+    padding: 0.9rem;
+  }
+
+  .reader-body h1,
+  .notion-import h1 {
+    font-size: 1.65rem;
+    letter-spacing: 0;
+  }
+
+  .reader-body h2,
+  .notion-import h2 {
+    font-size: 1.35rem;
+    letter-spacing: 0;
+  }
+
+  .reader-body p,
+  .reader-body ul,
+  .reader-body ol,
+  .reader-body blockquote,
+  .reader-body pre,
+  .notion-import p,
+  .notion-import li,
+  .notion-import figcaption,
+  .notion-import td,
+  .notion-import th,
+  .notion-import blockquote {
+    font-size: 0.97rem;
+  }
+
+  .reader-body,
+  .notion-import,
+  .topic-card,
+  .topic-note-button {
+    overflow-wrap: anywhere;
+  }
+
+  .reader-body pre,
+  .notion-import table,
+  .notion-import .equation {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 30rem) {
+  .notes-nav-inner,
+  .notes-hero,
+  .notes-page {
+    width: min(100% - 1rem, 76rem);
+  }
+
+  .nav-links {
+    display: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  .notes-nav.is-open .nav-links {
+    display: grid;
+  }
+
+  .nav-links a {
+    justify-content: center;
+    padding: 0 0.55rem;
+    text-align: center;
+  }
+
+  .notes-hero-simple {
+    padding: 3rem 0 1.8rem;
+  }
+
+  .notes-page {
+    padding-bottom: 2rem;
+  }
+
+  .topic-card,
+  .topic-sidebar-card,
+  .topic-reader {
+    padding: 0.95rem;
+  }
+
+  .reader-body blockquote,
+  .notion-import .callout,
+  .notion-import .equation,
+  .reader-body pre {
+    padding: 0.85rem;
+    border-radius: 0.85rem;
   }
 }

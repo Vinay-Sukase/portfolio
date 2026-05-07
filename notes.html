@@ -14,12 +14,17 @@
   </head>
   <body>
     <nav class="notes-nav">
-      <a href="index.html#home" class="nav-logo">vinay<span>.</span>sukase</a>
-      <div class="nav-links">
-        <a href="index.html#about">About</a>
-        <a href="index.html#projects">Projects</a>
-        <a href="notes.html" class="active">Subject Notes</a>
-        <a href="index.html#contact" class="nav-cta">Contact</a>
+      <div class="notes-nav-inner">
+        <a href="index.html#home" class="nav-logo">Vinay Sukase</a>
+        <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="notes-nav-links">
+          <span class="nav-toggle-lines" aria-hidden="true"></span>
+        </button>
+        <div class="nav-links" id="notes-nav-links">
+          <a href="index.html#about">About</a>
+          <a href="index.html#projects">Projects</a>
+          <a href="notes.html" class="active">Subject Notes</a>
+          <a href="index.html#contact" class="nav-cta">Contact</a>
+        </div>
       </div>
     </nav>
 
@@ -95,5 +100,22 @@
 
     <script src="assets/js/notes-data.js"></script>
     <script src="assets/js/notes-home.js"></script>
+    <script>
+      const notesNav = document.querySelector(".notes-nav");
+      const navToggle = document.querySelector(".nav-toggle");
+      const navLinks = document.querySelectorAll(".nav-links a");
+
+      navToggle?.addEventListener("click", () => {
+        const isOpen = notesNav.classList.toggle("is-open");
+        navToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          notesNav.classList.remove("is-open");
+          navToggle?.setAttribute("aria-expanded", "false");
+        });
+      });
+    </script>
   </body>
 </html>
